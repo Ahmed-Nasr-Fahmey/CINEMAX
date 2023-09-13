@@ -6,4 +6,6 @@ class ConstImages {
     'Assets/images/Logo.svg',
     height: 88,
   );
+  static String onboarding1Backgraound =
+      'Assets/images/onbarding/Onboarding1 Image.png';
 }

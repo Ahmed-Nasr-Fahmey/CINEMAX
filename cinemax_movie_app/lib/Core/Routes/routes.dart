@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:cinemax_movie_app/Features/OnBoarding/Splash/splash_view.dart';
 import 'package:cinemax_movie_app/Features/Onboarding/CreateNewPassword/create_new_password_view.dart';
 import 'package:cinemax_movie_app/Features/Onboarding/LogIn/login_view.dart';
@@ -7,8 +8,6 @@ import 'package:cinemax_movie_app/Features/Onboarding/OnboardingView2/onboarding
 import 'package:cinemax_movie_app/Features/Onboarding/OnboardingView3/onboarding_view_3.dart';
 import 'package:cinemax_movie_app/Features/Onboarding/SignUp/sign_up_view.dart';
 import 'package:cinemax_movie_app/Features/Onboarding/Verification/verification_view.dart';
-import 'package:flutter/material.dart';
-
 import '../../Features/OnBoarding/ResetPassword/reset_password_view.dart';
 
 class Routes {
