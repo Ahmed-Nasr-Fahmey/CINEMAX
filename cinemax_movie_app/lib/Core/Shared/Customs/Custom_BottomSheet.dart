@@ -52,7 +52,7 @@ final void Function()? onTap;
                           children: [
                             
                             SvgPicture.asset(image,width: 80,height: 80,),
-                         Positioned(
+                       const  Positioned(
                           left: 30,
                           top: 30,
                           width: 24,
