@@ -6,4 +6,5 @@ class ConstColors {
   static const whitecolor = Color(0xFFFFFFFF);
   static const grayColor = Color(0xFF92929D);
   static const whiteColor = Color(0xFFEBEBEF);
+  static const blackcolor = Color.fromRGBO(23, 23, 37, 1);
 }
