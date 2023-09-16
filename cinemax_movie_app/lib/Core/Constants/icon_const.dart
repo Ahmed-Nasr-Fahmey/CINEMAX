@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -14,5 +13,15 @@ class ConstIcons {
     FontAwesomeIcons.solidEyeSlash,
     size: 20,
     color: ConstColors.grayColor,
+  );
+  static const Widget solidBakeIcon = FaIcon(
+    FontAwesomeIcons.angleLeft,
+    size: 20,
+    color: ConstColors.whiteColor,
+  );
+  static const Widget solidLoveIcon = FaIcon(
+    FontAwesomeIcons.solidHeart,
+    size: 20,
+    color: Color(0xffFB4141),
   );
 }
