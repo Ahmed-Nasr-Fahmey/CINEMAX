@@ -7,6 +7,7 @@ import 'package:cinemax_movie_app/Core/Shared/Functions/functions.dart';
 import 'package:cinemax_movie_app/Core/Shared/Validation/validation.dart';
 import 'package:cinemax_movie_app/Features/Home/home_view.dart';
 import 'package:cinemax_movie_app/Features/Onboarding/ResetPassword/reset_password_view.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -21,6 +22,8 @@ class LogInView extends StatefulWidget {
 
 class _LogInViewState extends State<LogInView> {
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
+  String? emailAddress;
+  String? password;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -61,6 +64,9 @@ class _LogInViewState extends State<LogInView> {
                 padding: const EdgeInsets.only(
                     top: 72, left: 24, right: 24, bottom: 32),
                 child: CustomTextFormField(
+                  onChanged: (value) {
+                    emailAddress = value;
+                  },
                   suffixIcon: null,
                   validator: (value) {
                     return Validation.emailValidation(value);
@@ -73,6 +79,9 @@ class _LogInViewState extends State<LogInView> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24),
                 child: CustomTextFormField(
+                  onChanged: (value) {
+                    password = value;
+                  },
                   suffixIcon: ConstIcons.solidEyeSlashIcon,
                   validator: (value) {
                     return Validation.passwordValidation(value);
@@ -105,9 +114,24 @@ class _LogInViewState extends State<LogInView> {
               ),
               CustomMainButton(
                 text: "Login",
-                onTap: () {
+                onTap: () async {
                   if (LogInView._formKey.currentState!.validate()) {
-                    Navigator.pushNamed(context, HomeView.routeName);
+                    try {
+                      await FirebaseAuth.instance.signInWithEmailAndPassword(
+                        email: emailAddress!,
+                        password: password!,
+                      );
+                      // ignore: use_build_context_synchronously
+                      Navigator.pushNamed(context, HomeView.routeName);
+                    } on FirebaseAuthException catch (e) {
+                      if (e.code == 'user-not-found') {
+                        debugPrint('No user found for that email.');
+                      } else if (e.code == 'wrong-password') {
+                        debugPrint('Wrong password provided for that user.');
+                      }
+                    } catch (e) {
+                      debugPrint('ther was an erorr');
+                    }
                   } else {
                     setState(
                       () {

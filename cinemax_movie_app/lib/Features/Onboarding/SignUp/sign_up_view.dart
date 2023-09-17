@@ -6,6 +6,7 @@ import 'package:cinemax_movie_app/Core/Shared/Customs/custom_text_form_field.dar
 import 'package:cinemax_movie_app/Core/Shared/Functions/functions.dart';
 import 'package:cinemax_movie_app/Core/Shared/Validation/validation.dart';
 import 'package:cinemax_movie_app/Features/Home/home_view.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -21,7 +22,8 @@ class SignUpView extends StatefulWidget {
 
 class _SignUpViewState extends State<SignUpView> {
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
-
+  String? emailAddress;
+  String? password;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -67,7 +69,11 @@ class _SignUpViewState extends State<SignUpView> {
                   child: CustomTextFormField(
                     suffixIcon: null,
                     validator: (value) {
-                      return Validation.emailValidation(value);
+                      if (value!.isNotEmpty) {
+                        return null;
+                      } else {
+                        return 'Field is requierd';
+                      }
                     },
                     obscureText: false,
                     isPassword: false,
@@ -78,6 +84,9 @@ class _SignUpViewState extends State<SignUpView> {
                   padding:
                       const EdgeInsets.only(left: 24, right: 24, bottom: 24),
                   child: CustomTextFormField(
+                    onChanged: (value) {
+                      emailAddress = value;
+                    },
                     suffixIcon: null,
                     validator: (value) {
                       return Validation.emailValidation(value);
@@ -90,6 +99,9 @@ class _SignUpViewState extends State<SignUpView> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24),
                   child: CustomTextFormField(
+                    onChanged: (value) {
+                      password = value;
+                    },
                     suffixIcon: ConstIcons.solidEyeSlashIcon,
                     validator: (value) {
                       return Validation.passwordValidation(value);
@@ -104,9 +116,26 @@ class _SignUpViewState extends State<SignUpView> {
                 ),
                 CustomMainButton(
                   text: "Sign Up",
-                  onTap: () {
+                  onTap: () async {
                     if (SignUpView._formKey.currentState!.validate()) {
-                      Navigator.pushNamed(context, HomeView.routeName);
+                      try {
+                        await FirebaseAuth.instance
+                            .createUserWithEmailAndPassword(
+                          email: emailAddress!,
+                          password: password!,
+                        );
+                        // ignore: use_build_context_synchronously
+                        Navigator.pushNamed(context, HomeView.routeName);
+                      } on FirebaseAuthException catch (e) {
+                        if (e.code == 'weak-password') {
+                          debugPrint('The password provided is too weak.');
+                        } else if (e.code == 'email-already-in-use') {
+                          debugPrint(
+                              'The account already exists for that email.');
+                        }
+                      } catch (e) {
+                        debugPrint(e.toString());
+                      }
                     } else {
                       setState(
                         () {

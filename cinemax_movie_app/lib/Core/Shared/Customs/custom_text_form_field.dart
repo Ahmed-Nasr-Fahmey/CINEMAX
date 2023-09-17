@@ -17,7 +17,7 @@ class CustomTextFormField extends StatefulWidget {
   });
   final String lable;
   Widget? suffixIcon;
-  final String? Function(String?)? validator;
+  String? Function(String?)? validator;
   final Function(String)? onChanged;
   bool obscureText;
   final bool isPassword;
@@ -52,7 +52,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           borderSide: BorderSide(
             width: 1,
             color: ConstColors.grayColor.withOpacity(0.2),
-          ), //<-- SEE HERE
+          ),
           borderRadius: BorderRadius.circular(50),
         ),
         focusedBorder: OutlineInputBorder(
