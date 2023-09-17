@@ -20,93 +20,107 @@ class LogInView extends StatefulWidget {
 }
 
 class _LogInViewState extends State<LogInView> {
-    AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
+  AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
   @override
   Widget build(BuildContext context) {
-    return  GestureDetector(
-            onTap: () => GlobalFunctions.unFocusTextFieldsWhenClickOutSide(context),
-
+    return GestureDetector(
+      onTap: () => GlobalFunctions.unFocusTextFieldsWhenClickOutSide(context),
       child: Scaffold(
-        body: SingleChildScrollView(
-          child: Form(
-               key: LogInView._formKey,
-                autovalidateMode: autovalidateMode,
-            child: Column(
-              children: [
-             const    CustomAppBar(hasLoveIcon: false, text: 'Login'),
-             
+          body: SingleChildScrollView(
+        child: Form(
+          key: LogInView._formKey,
+          autovalidateMode: autovalidateMode,
+          child: Column(
+            children: [
+              const CustomAppBar(hasLoveIcon: false, text: 'Login'),
               Padding(
-                padding: const EdgeInsets.only(top: 40,bottom: 8),
-                child: Text("Hi, Tiffany",style: GoogleFonts.montserrat( color: ConstColors.whiteColor,fontSize: 24,fontWeight: FontWeight.w600),),
-             
-             
-             
+                padding: const EdgeInsets.only(top: 40, bottom: 8),
+                child: Text(
+                  "Hi, Tiffany",
+                  style: GoogleFonts.montserrat(
+                      color: ConstColors.whiteColor,
+                      fontSize: 24,
+                      fontWeight: FontWeight.w600),
+                ),
               ),
-              Text("Welcome back! Please enter ",style: GoogleFonts.montserrat( color: ConstColors.grayColor,fontSize: 12,fontWeight: FontWeight.w600),),
-              Text("your details.",style: GoogleFonts.montserrat( color: ConstColors.grayColor,fontSize: 12,fontWeight: FontWeight.w600),),
-          
-          
-          
-            Padding(
-              padding: const EdgeInsets.only(top: 72,left: 24,right: 24,bottom: 32),
-              child: CustomTextFormField(
-                            suffixIcon: null,
-                            validator: (value) {
-                              return Validation.emailValidation(value);
-                            },
-                            obscureText: false,
-                            isPassword: false,
-                            lable: 'Email Address',
-                          ),
-            ),
-        
-                 Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 24),
-                    child: CustomTextFormField(
-                      suffixIcon: ConstIcons.solidEyeSlashIcon,
-                      validator: (value) {
-                        return Validation.passwordValidation(value);
-                      },
-                      obscureText: true,
-                      isPassword: true,
-                      lable: 'Password',
-                    ),
-                  ),
-            
-        
+              Text(
+                "Welcome back! Please enter ",
+                style: GoogleFonts.montserrat(
+                    color: ConstColors.grayColor,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600),
+              ),
+              Text(
+                "your details.",
+                style: GoogleFonts.montserrat(
+                    color: ConstColors.grayColor,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                    top: 72, left: 24, right: 24, bottom: 32),
+                child: CustomTextFormField(
+                  suffixIcon: null,
+                  validator: (value) {
+                    return Validation.emailValidation(value);
+                  },
+                  obscureText: false,
+                  isPassword: false,
+                  lable: 'Email Address',
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                child: CustomTextFormField(
+                  suffixIcon: ConstIcons.solidEyeSlashIcon,
+                  validator: (value) {
+                    return Validation.passwordValidation(value);
+                  },
+                  obscureText: true,
+                  isPassword: true,
+                  lable: 'Password',
+                ),
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(top: 8,bottom: 40,right: 24),
+                    padding:
+                        const EdgeInsets.only(top: 24, bottom: 40, right: 24),
                     child: GestureDetector(
-                      onTap: (){
-                        Navigator.pushNamed(context, ResetPasswordView.routeName);
-                      },
-                      child: Text("Forgot Password?",style: GoogleFonts.montserrat( color: ConstColors.primaryColor,fontSize: 12,fontWeight: FontWeight.w600),)),
+                        onTap: () {
+                          Navigator.pushNamed(
+                              context, ResetPasswordView.routeName);
+                        },
+                        child: Text(
+                          "Forgot Password?",
+                          style: GoogleFonts.montserrat(
+                              color: ConstColors.primaryColor,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w600),
+                        )),
                   ),
                 ],
               ),
-                             
-              CustomMainButton(text: "Login", 
-              
-              onTap: () {
-                      if (LogInView._formKey.currentState!.validate()) {
-                        Navigator.pushNamed(context, HomeView.routeName);
-                      } else {
-                        setState(
-                          () {
-                            autovalidateMode = AutovalidateMode.always;
-                          },
-                        );
-                      }
-                    },)
-                     ],
-            ),
+              CustomMainButton(
+                text: "Login",
+                onTap: () {
+                  if (LogInView._formKey.currentState!.validate()) {
+                    Navigator.pushNamed(context, HomeView.routeName);
+                  } else {
+                    setState(
+                      () {
+                        autovalidateMode = AutovalidateMode.always;
+                      },
+                    );
+                  }
+                },
+              )
+            ],
           ),
-        )
-        
-      ),
+        ),
+      )),
     );
   }
 }

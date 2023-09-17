@@ -1,5 +1,4 @@
 import 'package:cinemax_movie_app/Core/Constants/icon_const.dart';
-import 'package:cinemax_movie_app/Features/Onboarding/LogIn/login_view.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -96,7 +95,9 @@ class _CreateNewPasswordViewState extends State<CreateNewPasswordView> {
                   onTap: () {
                     if (CreateNewPasswordView._formKey.currentState!
                         .validate()) {
-                      Navigator.pushNamed(context, LogInView.routeName);
+                      Navigator.pop(context);
+                      Navigator.pop(context);
+                      Navigator.pop(context);
                     } else {
                       setState(
                         () {

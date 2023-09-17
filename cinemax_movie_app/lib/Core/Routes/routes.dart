@@ -1,3 +1,4 @@
+import 'package:cinemax_movie_app/Features/Home/home_view.dart';
 import 'package:flutter/material.dart';
 import 'package:cinemax_movie_app/Features/OnBoarding/Splash/splash_view.dart';
 import 'package:cinemax_movie_app/Features/Onboarding/CreateNewPassword/create_new_password_view.dart';
@@ -45,6 +46,9 @@ class Routes {
         return MaterialPageRoute(
             builder: (context) => const CreateNewPasswordView(),
             settings: settings);
+      case HomeView.routeName:
+        return MaterialPageRoute(
+            builder: (context) => const HomeView(), settings: settings);
       default:
         return MaterialPageRoute(
             builder: (context) => const SplashView(), settings: settings);

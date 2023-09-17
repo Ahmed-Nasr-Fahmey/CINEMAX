@@ -20,82 +20,103 @@ class SignUpView extends StatefulWidget {
 }
 
 class _SignUpViewState extends State<SignUpView> {
- AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
+  AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
 
   @override
   Widget build(BuildContext context) {
-    return  GestureDetector(
-        onTap: () => GlobalFunctions.unFocusTextFieldsWhenClickOutSide(context),
-
+    return GestureDetector(
+      onTap: () => GlobalFunctions.unFocusTextFieldsWhenClickOutSide(context),
       child: Scaffold(
-        body:SingleChildScrollView(
+        body: SingleChildScrollView(
           child: Form(
-             key: SignUpView._formKey,
-              autovalidateMode: autovalidateMode,
+            key: SignUpView._formKey,
+            autovalidateMode: autovalidateMode,
             child: Column(
               children: [
-                const CustomAppBar(hasLoveIcon: false,text: "Sign Up",),
-                 Padding(
-                   padding: const EdgeInsets.only(top: 40,bottom: 8),
-                   child: Text("Let’s get started",style: GoogleFonts.montserrat( color: ConstColors.whiteColor,fontSize: 24,fontWeight: FontWeight.w600),),
-                 ),
-                    Text("The latest movies and series ",style: GoogleFonts.montserrat( color: ConstColors.grayColor,fontSize: 12,fontWeight: FontWeight.w600),), 
-                    Text("are here",style: GoogleFonts.montserrat( color: ConstColors.grayColor,fontSize: 12,fontWeight: FontWeight.w600),),
-          
-             Padding(
-                padding: const EdgeInsets.only(top:64,left: 24,right: 24,bottom: 24),
-                child: CustomTextFormField(
-                              suffixIcon: null,
-                              validator: (value) {
-                                return Validation.emailValidation(value);
-                              },
-                              obscureText: false,
-                              isPassword: false,
-                              lable: 'Full name',
-                            ),
-              ),  
-              Padding(
-                padding: const EdgeInsets.only(left: 24,right: 24,bottom: 24),
-                child: CustomTextFormField(
-                              suffixIcon: null,
-                              validator: (value) {
-                                return Validation.emailValidation(value);
-                              },
-                              obscureText: false,
-                              isPassword: false,
-                              lable: 'Email Address',
-                            ),
-              ),
-        
-                 Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 24),
-                      child: CustomTextFormField(
-                        suffixIcon: ConstIcons.solidEyeSlashIcon,
-                        validator: (value) {
-                          return Validation.passwordValidation(value);
-                        },
-                        obscureText: true,
-                        isPassword: true,
-                        lable: 'Password',
-                      ),
-                    ),
-          
-        
-          const SizedBox(height: 40,),
-                  CustomMainButton(text: "Sign Up",  
+                const CustomAppBar(
+                  hasLoveIcon: false,
+                  text: "Sign Up",
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 40, bottom: 8),
+                  child: Text(
+                    "Let’s get started",
+                    style: GoogleFonts.montserrat(
+                        color: ConstColors.whiteColor,
+                        fontSize: 24,
+                        fontWeight: FontWeight.w600),
+                  ),
+                ),
+                Text(
+                  "The latest movies and series ",
+                  style: GoogleFonts.montserrat(
+                      color: ConstColors.grayColor,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600),
+                ),
+                Text(
+                  "are here",
+                  style: GoogleFonts.montserrat(
+                      color: ConstColors.grayColor,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                      top: 64, left: 24, right: 24, bottom: 24),
+                  child: CustomTextFormField(
+                    suffixIcon: null,
+                    validator: (value) {
+                      return Validation.emailValidation(value);
+                    },
+                    obscureText: false,
+                    isPassword: false,
+                    lable: 'Full name',
+                  ),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.only(left: 24, right: 24, bottom: 24),
+                  child: CustomTextFormField(
+                    suffixIcon: null,
+                    validator: (value) {
+                      return Validation.emailValidation(value);
+                    },
+                    obscureText: false,
+                    isPassword: false,
+                    lable: 'Email Address',
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                  child: CustomTextFormField(
+                    suffixIcon: ConstIcons.solidEyeSlashIcon,
+                    validator: (value) {
+                      return Validation.passwordValidation(value);
+                    },
+                    obscureText: true,
+                    isPassword: true,
+                    lable: 'Password',
+                  ),
+                ),
+                const SizedBox(
+                  height: 40,
+                ),
+                CustomMainButton(
+                  text: "Sign Up",
                   onTap: () {
-                        if (SignUpView._formKey.currentState!.validate()) {
-                          Navigator.pushNamed(context, HomeView.routeName);
-                        } else {
-                          setState(
-                            () {
-                              autovalidateMode = AutovalidateMode.always;
-                            },
-                          );
-                        }
-                      }
-                        )
-                                    ],
+                    if (SignUpView._formKey.currentState!.validate()) {
+                      Navigator.pushNamed(context, HomeView.routeName);
+                    } else {
+                      setState(
+                        () {
+                          autovalidateMode = AutovalidateMode.always;
+                        },
+                      );
+                    }
+                  },
+                )
+              ],
             ),
           ),
         ),
