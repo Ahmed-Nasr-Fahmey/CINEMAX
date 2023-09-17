@@ -1,5 +1,6 @@
 import 'package:cinemax_movie_app/Core/Constants/colors_const.dart';
 import 'package:cinemax_movie_app/Core/Constants/icon_const.dart';
+import 'package:cinemax_movie_app/Core/Helper/show_snack_bar.dart';
 import 'package:cinemax_movie_app/Core/Shared/Customs/custom_app_bar.dart';
 import 'package:cinemax_movie_app/Core/Shared/Customs/custom_main_button.dart';
 import 'package:cinemax_movie_app/Core/Shared/Customs/custom_text_form_field.dart';
@@ -29,122 +30,125 @@ class _LogInViewState extends State<LogInView> {
     return GestureDetector(
       onTap: () => GlobalFunctions.unFocusTextFieldsWhenClickOutSide(context),
       child: Scaffold(
-          body: SingleChildScrollView(
-        child: Form(
-          key: LogInView._formKey,
-          autovalidateMode: autovalidateMode,
-          child: Column(
-            children: [
-              const CustomAppBar(hasLoveIcon: false, text: 'Login'),
-              Padding(
-                padding: const EdgeInsets.only(top: 40, bottom: 8),
-                child: Text(
-                  "Hi, Tiffany",
+        body: SingleChildScrollView(
+          child: Form(
+            key: LogInView._formKey,
+            autovalidateMode: autovalidateMode,
+            child: Column(
+              children: [
+                const CustomAppBar(hasLoveIcon: false, text: 'Login'),
+                Padding(
+                  padding: const EdgeInsets.only(top: 40, bottom: 8),
+                  child: Text(
+                    "Hi, Tiffany",
+                    style: GoogleFonts.montserrat(
+                        color: ConstColors.whiteColor,
+                        fontSize: 24,
+                        fontWeight: FontWeight.w600),
+                  ),
+                ),
+                Text(
+                  "Welcome back! Please enter ",
                   style: GoogleFonts.montserrat(
-                      color: ConstColors.whiteColor,
-                      fontSize: 24,
+                      color: ConstColors.grayColor,
+                      fontSize: 12,
                       fontWeight: FontWeight.w600),
                 ),
-              ),
-              Text(
-                "Welcome back! Please enter ",
-                style: GoogleFonts.montserrat(
-                    color: ConstColors.grayColor,
-                    fontSize: 12,
-                    fontWeight: FontWeight.w600),
-              ),
-              Text(
-                "your details.",
-                style: GoogleFonts.montserrat(
-                    color: ConstColors.grayColor,
-                    fontSize: 12,
-                    fontWeight: FontWeight.w600),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(
-                    top: 72, left: 24, right: 24, bottom: 32),
-                child: CustomTextFormField(
-                  onChanged: (value) {
-                    emailAddress = value;
-                  },
-                  suffixIcon: null,
-                  validator: (value) {
-                    return Validation.emailValidation(value);
-                  },
-                  obscureText: false,
-                  isPassword: false,
-                  lable: 'Email Address',
+                Text(
+                  "your details.",
+                  style: GoogleFonts.montserrat(
+                      color: ConstColors.grayColor,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
-                child: CustomTextFormField(
-                  onChanged: (value) {
-                    password = value;
-                  },
-                  suffixIcon: ConstIcons.solidEyeSlashIcon,
-                  validator: (value) {
-                    return Validation.passwordValidation(value);
-                  },
-                  obscureText: true,
-                  isPassword: true,
-                  lable: 'Password',
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Padding(
-                    padding:
-                        const EdgeInsets.only(top: 24, bottom: 40, right: 24),
-                    child: GestureDetector(
-                        onTap: () {
-                          Navigator.pushNamed(
-                              context, ResetPasswordView.routeName);
-                        },
-                        child: Text(
-                          "Forgot Password?",
-                          style: GoogleFonts.montserrat(
-                              color: ConstColors.primaryColor,
-                              fontSize: 12,
-                              fontWeight: FontWeight.w600),
-                        )),
+                Padding(
+                  padding: const EdgeInsets.only(
+                      top: 72, left: 24, right: 24, bottom: 32),
+                  child: CustomTextFormField(
+                    onChanged: (value) {
+                      emailAddress = value;
+                    },
+                    suffixIcon: null,
+                    validator: (value) {
+                      return Validation.emailValidation(value);
+                    },
+                    obscureText: false,
+                    isPassword: false,
+                    lable: 'Email Address',
                   ),
-                ],
-              ),
-              CustomMainButton(
-                text: "Login",
-                onTap: () async {
-                  if (LogInView._formKey.currentState!.validate()) {
-                    try {
-                      await FirebaseAuth.instance.signInWithEmailAndPassword(
-                        email: emailAddress!,
-                        password: password!,
-                      );
-                      // ignore: use_build_context_synchronously
-                      Navigator.pushNamed(context, HomeView.routeName);
-                    } on FirebaseAuthException catch (e) {
-                      if (e.code == 'user-not-found') {
-                        debugPrint('No user found for that email.');
-                      } else if (e.code == 'wrong-password') {
-                        debugPrint('Wrong password provided for that user.');
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                  child: CustomTextFormField(
+                    onChanged: (value) {
+                      password = value;
+                    },
+                    suffixIcon: ConstIcons.solidEyeSlashIcon,
+                    validator: (value) {
+                      return Validation.passwordValidation(value);
+                    },
+                    obscureText: true,
+                    isPassword: true,
+                    lable: 'Password',
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(top: 24, bottom: 40, right: 24),
+                      child: GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(
+                                context, ResetPasswordView.routeName);
+                          },
+                          child: Text(
+                            "Forgot Password?",
+                            style: GoogleFonts.montserrat(
+                                color: ConstColors.primaryColor,
+                                fontSize: 12,
+                                fontWeight: FontWeight.w600),
+                          )),
+                    ),
+                  ],
+                ),
+                CustomMainButton(
+                  text: "Login",
+                  onTap: () async {
+                    if (LogInView._formKey.currentState!.validate()) {
+                      try {
+                        await FirebaseAuth.instance.signInWithEmailAndPassword(
+                          email: emailAddress!,
+                          password: password!,
+                        );
+                        // ignore: use_build_context_synchronously
+                        Navigator.pushNamed(context, HomeView.routeName);
+                      } on FirebaseAuthException catch (e) {
+                        if (e.code == 'user-not-found') {
+                          showSnackBar(
+                              context, 'No user found for that email.');
+                        } else if (e.code == 'wrong-password') {
+                          showSnackBar(context,
+                              'Wrong password provided for that user.');
+                        }
+                      } catch (e) {
+                        showSnackBar(context, 'ther was an erorr');
                       }
-                    } catch (e) {
-                      debugPrint('ther was an erorr');
+                    } else {
+                      setState(
+                        () {
+                          autovalidateMode = AutovalidateMode.always;
+                        },
+                      );
                     }
-                  } else {
-                    setState(
-                      () {
-                        autovalidateMode = AutovalidateMode.always;
-                      },
-                    );
-                  }
-                },
-              )
-            ],
+                  },
+                )
+              ],
+            ),
           ),
         ),
-      )),
+      ),
     );
   }
 }

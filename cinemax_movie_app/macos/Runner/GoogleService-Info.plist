@@ -3,17 +3,17 @@
 <plist version="1.0">
 <dict>
 	<key>API_KEY</key>
-	<string>AIzaSyBDxHKtH4ES6-8VlwJJrJAix4PMpJadzoE</string>
+	<string>AIzaSyC9OaWmyGDePHudbrrSA8JcoftreC583CY</string>
 	<key>GCM_SENDER_ID</key>
-	<string>295418757661</string>
+	<string>980526025600</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.example.cinemaxMovieApp</string>
 	<key>PROJECT_ID</key>
-	<string>cinemax-movie-app</string>
+	<string>cinemax-movie-app-60aaa</string>
 	<key>STORAGE_BUCKET</key>
-	<string>cinemax-movie-app.appspot.com</string>
+	<string>cinemax-movie-app-60aaa.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -25,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:295418757661:ios:b114736a0880c1c6d9fcf4</string>
+	<string>1:980526025600:ios:4067f02bae70b8c8564f65</string>
 </dict>
 </plist>
