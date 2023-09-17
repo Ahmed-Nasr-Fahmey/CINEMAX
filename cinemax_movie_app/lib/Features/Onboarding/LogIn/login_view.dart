@@ -5,7 +5,6 @@ import 'package:cinemax_movie_app/Core/Shared/Customs/custom_main_button.dart';
 import 'package:cinemax_movie_app/Core/Shared/Customs/custom_text_form_field.dart';
 import 'package:cinemax_movie_app/Core/Shared/Functions/functions.dart';
 import 'package:cinemax_movie_app/Core/Shared/Validation/validation.dart';
-import 'package:cinemax_movie_app/Features/Home/home_view.dart';
 import 'package:cinemax_movie_app/Features/Onboarding/ResetPassword/reset_password_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -116,22 +115,29 @@ class _LogInViewState extends State<LogInView> {
                 text: "Login",
                 onTap: () async {
                   if (LogInView._formKey.currentState!.validate()) {
-                    try {
-                      await FirebaseAuth.instance.signInWithEmailAndPassword(
-                        email: emailAddress!,
-                        password: password!,
-                      );
-                      // ignore: use_build_context_synchronously
-                      Navigator.pushNamed(context, HomeView.routeName);
-                    } on FirebaseAuthException catch (e) {
-                      if (e.code == 'user-not-found') {
-                        debugPrint('No user found for that email.');
-                      } else if (e.code == 'wrong-password') {
-                        debugPrint('Wrong password provided for that user.');
-                      }
-                    } catch (e) {
-                      debugPrint('ther was an erorr');
-                    }
+try {
+  await FirebaseAuth.instance.signInWithEmailAndPassword(
+    email: emailAddress!, 
+    password: password!
+  );
+
+} on FirebaseAuthException catch(e) {
+
+  if(e.code == 'wrong-password' || e.code == 'user-not-found') {
+
+    // Show error message
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Invalid email or password'), 
+      )
+    );
+
+  } else {
+    // other auth exceptions
+  }
+
+}                   
+
                   } else {
                     setState(
                       () {
