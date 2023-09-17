@@ -44,38 +44,38 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyCv4frFdSzi_brcnqEWNfDP_AYNWlVrt8o',
-    appId: '1:295418757661:web:d1a1619e18ca9c69d9fcf4',
-    messagingSenderId: '295418757661',
-    projectId: 'cinemax-movie-app',
-    authDomain: 'cinemax-movie-app.firebaseapp.com',
-    storageBucket: 'cinemax-movie-app.appspot.com',
-    measurementId: 'G-3JEG4FYGG9',
+    apiKey: 'AIzaSyCWEmBOdLwhKh8t3nTQ_U80hYYbe_jb3Zc',
+    appId: '1:1063586552091:web:34ab2ca6e926702f54dbbe',
+    messagingSenderId: '1063586552091',
+    projectId: 'movie-app-c668d',
+    authDomain: 'movie-app-c668d.firebaseapp.com',
+    storageBucket: 'movie-app-c668d.appspot.com',
+    measurementId: 'G-MYGC8JRLQL',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCgrhUSmm7mGWNQ_T4M4THxODtMXrGghao',
-    appId: '1:295418757661:android:7a2bb6bb0740a6add9fcf4',
-    messagingSenderId: '295418757661',
-    projectId: 'cinemax-movie-app',
-    storageBucket: 'cinemax-movie-app.appspot.com',
+    apiKey: 'AIzaSyDpCOms7TKrxZiHdvg22vYuKGwbrN1k8No',
+    appId: '1:1063586552091:android:ce8d764058187ff454dbbe',
+    messagingSenderId: '1063586552091',
+    projectId: 'movie-app-c668d',
+    storageBucket: 'movie-app-c668d.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBDxHKtH4ES6-8VlwJJrJAix4PMpJadzoE',
-    appId: '1:295418757661:ios:b114736a0880c1c6d9fcf4',
-    messagingSenderId: '295418757661',
-    projectId: 'cinemax-movie-app',
-    storageBucket: 'cinemax-movie-app.appspot.com',
+    apiKey: 'AIzaSyC-UsU1QJDMAF60ZS8z337edMKG6bBYYMY',
+    appId: '1:1063586552091:ios:f4de601af6cd1e2d54dbbe',
+    messagingSenderId: '1063586552091',
+    projectId: 'movie-app-c668d',
+    storageBucket: 'movie-app-c668d.appspot.com',
     iosBundleId: 'com.example.cinemaxMovieApp',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyBDxHKtH4ES6-8VlwJJrJAix4PMpJadzoE',
-    appId: '1:295418757661:ios:b114736a0880c1c6d9fcf4',
-    messagingSenderId: '295418757661',
-    projectId: 'cinemax-movie-app',
-    storageBucket: 'cinemax-movie-app.appspot.com',
+    apiKey: 'AIzaSyC-UsU1QJDMAF60ZS8z337edMKG6bBYYMY',
+    appId: '1:1063586552091:ios:f4de601af6cd1e2d54dbbe',
+    messagingSenderId: '1063586552091',
+    projectId: 'movie-app-c668d',
+    storageBucket: 'movie-app-c668d.appspot.com',
     iosBundleId: 'com.example.cinemaxMovieApp',
   );
 }
