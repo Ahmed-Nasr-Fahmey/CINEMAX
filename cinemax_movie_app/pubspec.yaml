@@ -37,6 +37,7 @@ dependencies:
   flutter_svg: ^2.0.5
   font_awesome_flutter: ^10.0.0
   google_fonts: ^4.0.3
+  google_nav_bar: ^5.0.6
 
 dev_dependencies:
 
@@ -72,7 +73,18 @@ flutter:
     - Assets/images/Google.png
     - Assets/images/Apple.png
     - Assets/images/Facebook.png
-
+    - Assets/images/wishListMovie.png
+    - Assets/images/magic-box 1.png
+    - Assets/images/EditProfile.png
+    - Assets/images/visa.png
+    - Assets/images/MASTER CARD.png
+    - Assets/images/MovieDetails.png
+    - Assets/images/InstagramIcon.png
+    - Assets/images/FacebookIcon.png
+    - Assets/images/MassengerIcon.png
+    - Assets/images/TelegramIcon.png
+    - Assets/images/PaymentAlert.png
+    - Assets/images/UpcomingMovies.png
   #   - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
