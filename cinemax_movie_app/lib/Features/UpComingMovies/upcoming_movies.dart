@@ -1,24 +1,22 @@
 import 'package:cinemax_movie_app/Core/Shared/Customs/custom_app_bar.dart';
-import 'package:cinemax_movie_app/Core/Shared/widgets/bottom_navigation_bar.dart';
 import 'package:cinemax_movie_app/Core/Shared/widgets/upcoming_movie_card.dart';
 import 'package:cinemax_movie_app/Core/Shared/widgets/upcoming_movie_category.dart';
 import 'package:flutter/material.dart';
 
-class UpcomingMovies extends StatefulWidget {
-  const UpcomingMovies({super.key});
+class UpcomingMoviesView extends StatefulWidget {
+  const UpcomingMoviesView({super.key});
   static const String routeName = "UpcomingMovies";
 
   @override
-  State<UpcomingMovies> createState() => _UpcomingMoviesState();
+  State<UpcomingMoviesView> createState() => _UpcomingMoviesViewState();
 }
 
-class _UpcomingMoviesState extends State<UpcomingMovies> {
+class _UpcomingMoviesViewState extends State<UpcomingMoviesView> {
   String selectedCategory = "All";
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: const CustomBottomNavigationBar(),
       body: SingleChildScrollView(
         child: Column(
           children: [

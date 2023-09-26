@@ -1,16 +1,36 @@
 import 'package:cinemax_movie_app/Core/Constants/colors_const.dart';
+import 'package:cinemax_movie_app/Features/Downloads/downloads_view.dart';
 import 'package:cinemax_movie_app/Features/Home/home_view.dart';
+import 'package:cinemax_movie_app/Features/Profile/ProfileView/profile_view.dart';
+import 'package:cinemax_movie_app/Features/Search/SearchView/search_view.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
-class CustomBottomNavigationBar extends StatelessWidget {
+class CustomBottomNavigationBar extends StatefulWidget {
   const CustomBottomNavigationBar({super.key});
+  static const routeName = 'CustomBottomNavigationBar';
+  @override
+  State<CustomBottomNavigationBar> createState() =>
+      _CustomBottomNavigationBarState();
+}
+
+class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
+  int _selectedIndex = 0;
+
+  static const List<Widget> _widgetOptions = <Widget>[
+    HomeView(),
+    SearchView(),
+    DownloadsView(),
+    ProfileView(),
+  ];
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 16, right: 16, bottom: 16),
-      child: GNav(
+    return Scaffold(
+      body: _widgetOptions.elementAt(_selectedIndex),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.all(16),
+        child: GNav(
           color: ConstColors.grayColor,
           activeColor: ConstColors.primaryColor,
           gap: 6,
@@ -18,28 +38,32 @@ class CustomBottomNavigationBar extends StatelessWidget {
           tabBackgroundColor: const Color(0xFF252836),
           padding: const EdgeInsets.all(16),
           tabBorderRadius: 16,
-          textSize: 10,
-          tabs: [
+          tabs: const [
             GButton(
               icon: Icons.home,
               text: "Home",
-              onPressed: () {
-                Navigator.pushNamed(context, HomeView.routeName);
-              },
             ),
-            const GButton(
+            GButton(
               icon: Icons.search,
               text: "Search",
             ),
-            const GButton(
+            GButton(
               icon: Icons.file_download_outlined,
               text: "Downloads",
             ),
-            const GButton(
+            GButton(
               icon: Icons.person,
               text: "Profile",
             )
-          ]),
+          ],
+          selectedIndex: _selectedIndex,
+          onTabChange: (index) {
+            setState(() {
+              _selectedIndex = index;
+            });
+          },
+        ),
+      ),
     );
   }
 }

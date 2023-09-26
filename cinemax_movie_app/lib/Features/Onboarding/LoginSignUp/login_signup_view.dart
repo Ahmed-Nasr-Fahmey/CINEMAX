@@ -143,19 +143,20 @@ class LoginSignUpView extends StatelessWidget {
                     )),
               ),
               Container(
-                  width: 70,
-                  height: 70,
-                  decoration: BoxDecoration(
-                      color: const Color(0xFF4267B2),
-                      borderRadius: BorderRadius.circular(360)),
-                  child: Padding(
-                    padding: const EdgeInsets.all(22.0),
-                    child: Image.asset(
-                      'Assets/images/Facebook.png',
-                      width: 24,
-                      height: 24,
-                    ),
-                  ))
+                width: 70,
+                height: 70,
+                decoration: BoxDecoration(
+                    color: const Color(0xFF4267B2),
+                    borderRadius: BorderRadius.circular(360)),
+                child: Padding(
+                  padding: const EdgeInsets.all(22.0),
+                  child: Image.asset(
+                    'Assets/images/Facebook.png',
+                    width: 24,
+                    height: 24,
+                  ),
+                ),
+              )
             ],
           )
         ],

@@ -2,7 +2,8 @@ import 'package:cinemax_movie_app/Core/Constants/colors_const.dart';
 import 'package:cinemax_movie_app/Core/Constants/images_const.dart';
 import 'package:cinemax_movie_app/Core/Shared/Customs/custom_app_bar.dart';
 import 'package:cinemax_movie_app/Core/Shared/Customs/custom_main_button.dart';
-import 'package:cinemax_movie_app/Features/Onboarding/LogIn/login_view.dart';
+import 'package:cinemax_movie_app/Features/Onboarding/LoginSignUp/login_signup_view.dart';
+import 'package:cinemax_movie_app/Features/Premium/PaymentMethod/payment_method.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -100,7 +101,11 @@ class _PremiumAccountViewState extends State<PremiumAccountView> {
               // width: MediaQuery.of(context).size.width - 2 * 24,
             ),
           ),
-          CustomMainButton(text: 'Payment Method', onTap: () {}),
+          CustomMainButton(
+              text: 'Payment Method',
+              onTap: () {
+                Navigator.pushNamed(context, PaymentMethodView.routeName);
+              }),
           const SizedBox(
             height: 10,
           ),
@@ -118,7 +123,8 @@ class _PremiumAccountViewState extends State<PremiumAccountView> {
               ),
               TextButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, LogInView.routeName);
+                  Navigator.pushNamedAndRemoveUntil(
+                      context, LoginSignUpView.routeName, (route) => false);
                 },
                 child: Text(
                   'Login',

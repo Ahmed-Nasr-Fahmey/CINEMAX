@@ -1,5 +1,6 @@
 import 'package:cinemax_movie_app/Core/Shared/Functions/functions.dart';
-import 'package:cinemax_movie_app/Core/Shared/widgets/bottom_navigation_bar.dart';
+import 'package:cinemax_movie_app/Features/MostPopular/most_popular_view.dart';
+import 'package:cinemax_movie_app/Features/UpComingMovies/upcoming_movies.dart';
 import 'package:flutter/material.dart';
 
 import '../../Core/Shared/Builders/Home/home_banner_items_builder.dart';
@@ -15,22 +16,32 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => GlobalFunctions.unFocusTextFieldsWhenClickOutSide(context),
-      child: const Scaffold(
+      child: Scaffold(
         body: CustomScrollView(
-          physics: BouncingScrollPhysics(),
+          physics: const BouncingScrollPhysics(),
           slivers: [
-            SliverToBoxAdapter(child: HomeAppBar()),
-            SliverToBoxAdapter(child: CustomSearchTextField()),
-            SliverToBoxAdapter(child: HomeBunnerItemsBuilder()),
-            SliverToBoxAdapter(child: CustomSeeAllRow(text: 'Most popular')),
-            SliverToBoxAdapter(child: HomeMoviesCardBuilder()),
-            SliverToBoxAdapter(child: CustomSeeAllRow(text: 'Upcoming')),
-            SliverToBoxAdapter(child: HomeMoviesCardBuilder()),
+            const SliverToBoxAdapter(child: HomeAppBar()),
+            const SliverToBoxAdapter(child: CustomSearchTextField()),
+            const SliverToBoxAdapter(child: HomeBunnerItemsBuilder()),
+            SliverToBoxAdapter(
+                child: CustomSeeAllRow(
+              text: 'Most popular',
+              onPressed: () {
+                Navigator.pushNamed(context, MostPopularView.routeName);
+              },
+            )),
+            const SliverToBoxAdapter(child: HomeMoviesCardBuilder()),
+            SliverToBoxAdapter(
+                child: CustomSeeAllRow(
+              text: 'Upcoming',
+              onPressed: () {
+                Navigator.pushNamed(context, UpcomingMoviesView.routeName);
+              },
+            )),
+            const SliverToBoxAdapter(child: HomeMoviesCardBuilder()),
           ],
         ),
-      bottomNavigationBar: CustomBottomNavigationBar(),
       ),
-   
     );
   }
 }

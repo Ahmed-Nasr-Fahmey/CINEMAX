@@ -1,3 +1,4 @@
+import 'package:cinemax_movie_app/Features/Profile/EditProfile/edit_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -28,7 +29,7 @@ class ProfileWithEditProfileCard extends StatelessWidget {
             child: CircleAvatar(
               radius: 27,
               backgroundImage: NetworkImage(
-                  'https://scontent.fcai22-1.fna.fbcdn.net/v/t39.30808-6/351356037_1121650665225980_8313024570362431221_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=a2f6c7&_nc_ohc=G2aWxFlhpegAX9iqc7H&_nc_ht=scontent.fcai22-1.fna&oh=00_AfBDIBiVuKxwHPnbb-KUBueCi-TXhft7JkIUlkObPcmyvA&oe=650F25AA'),
+                  'https://scontent.fcai22-1.fna.fbcdn.net/v/t39.30808-6/351356037_1121650665225980_8313024570362431221_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=a2f6c7&_nc_ohc=I5qlFaGkM7wAX9rOc-u&_nc_ht=scontent.fcai22-1.fna&oh=00_AfAfCtWwymprX0jnASWuU7iCMwDrFZ5PYjwYaXW2q25ckQ&oe=65170EAA'),
             ),
           ),
           Column(
@@ -58,7 +59,11 @@ class ProfileWithEditProfileCard extends StatelessWidget {
             ],
           ),
           const Spacer(),
-          IconButton(onPressed: () {}, icon: ConstIcons.editIcon),
+          IconButton(
+              onPressed: () {
+                Navigator.pushNamed(context, EditProfileView.routeName);
+              },
+              icon: ConstIcons.editIcon),
         ],
       ),
     );

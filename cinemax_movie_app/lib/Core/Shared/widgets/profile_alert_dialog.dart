@@ -1,9 +1,9 @@
 import 'dart:ui';
 
+import 'package:cinemax_movie_app/Features/Onboarding/LoginSignUp/login_signup_view.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../Features/Onboarding/LogIn/login_view.dart';
 import '../../Constants/colors_const.dart';
 
 class ProfileAlertDialog extends StatelessWidget {
@@ -78,7 +78,8 @@ class ProfileAlertDialog extends StatelessWidget {
                         ),
                       ),
                       onPressed: () {
-                        Navigator.pushNamed(context, LogInView.routeName);
+                        Navigator.of(context).pushNamedAndRemoveUntil(
+                            LoginSignUpView.routeName, (route) => false);
                       },
                       child: SizedBox(
                         height: 56,

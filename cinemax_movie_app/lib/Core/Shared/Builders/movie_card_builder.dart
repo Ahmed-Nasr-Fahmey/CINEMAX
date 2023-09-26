@@ -9,21 +9,22 @@ class MovieCardBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool toggel = false;
+    bool isFree = false;
     return SizedBox(
-      height: MediaQuery.of(context).size.height,
+      height: MediaQuery.of(context).size.height - 160,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24),
         child: ListView.builder(
-            itemCount: 10,
-            physics: const BouncingScrollPhysics(),
-            itemBuilder: (context, index) {
-              toggel = !toggel;
-              return Padding(
-                padding: const EdgeInsets.only(bottom: 16),
-                child: CustomMovieCard(isFree: toggel),
-              );
-            }),
+          itemCount: 10,
+          physics: const BouncingScrollPhysics(),
+          itemBuilder: (context, index) {
+            isFree = !isFree;
+            return Padding(
+              padding: const EdgeInsets.only(bottom: 16),
+              child: CustomMovieCard(isFree: isFree),
+            );
+          },
+        ),
       ),
     );
   }

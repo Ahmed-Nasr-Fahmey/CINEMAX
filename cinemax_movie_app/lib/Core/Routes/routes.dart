@@ -1,3 +1,4 @@
+import 'package:cinemax_movie_app/Core/Shared/widgets/bottom_navigation_bar.dart';
 import 'package:cinemax_movie_app/Features/Downloads/downloads_view.dart';
 import 'package:cinemax_movie_app/Features/Home/home_view.dart';
 import 'package:cinemax_movie_app/Features/MostPopular/most_popular_view.dart';
@@ -16,7 +17,7 @@ import 'package:cinemax_movie_app/Features/Onboarding/OnboardingView2/onboarding
 import 'package:cinemax_movie_app/Features/Onboarding/OnboardingView3/onboarding_view_3.dart';
 import 'package:cinemax_movie_app/Features/Onboarding/SignUp/sign_up_view.dart';
 import 'package:cinemax_movie_app/Features/Onboarding/Verification/verification_view.dart';
-import 'package:cinemax_movie_app/Features/PaymentMethod/payment_method.dart';
+import 'package:cinemax_movie_app/Features/Premium/PaymentMethod/payment_method.dart';
 import 'package:cinemax_movie_app/Features/Profile/EditProfile/edit_profile.dart';
 import 'package:cinemax_movie_app/Features/Profile/Notification/notifactions.dart';
 import 'package:cinemax_movie_app/Features/Profile/Privacy/privacy_policy.dart';
@@ -85,26 +86,31 @@ class Routes {
       case PrivacyPolicy.routeName:
         return MaterialPageRoute(
             builder: (context) => const PrivacyPolicy(), settings: settings);
-      case EditProfile.routeName:
+      case EditProfileView.routeName:
         return MaterialPageRoute(
-            builder: (context) => const EditProfile(), settings: settings);
+            builder: (context) => const EditProfileView(), settings: settings);
 
-      case PaymentMethod.routeName:
+      case PaymentMethodView.routeName:
         return MaterialPageRoute(
-            builder: (context) => const PaymentMethod(), settings: settings);
+            builder: (context) => const PaymentMethodView(),
+            settings: settings);
       case MovieDetails.routeName:
         return MaterialPageRoute(
             builder: (context) => const MovieDetails(), settings: settings);
-case UpcomingMovies.routeName:
+      case UpcomingMoviesView.routeName:
         return MaterialPageRoute(
-            builder: (context) => const UpcomingMovies(), settings: settings);
+            builder: (context) => const UpcomingMoviesView(),
+            settings: settings);
       case Notifactions.routeName:
         return MaterialPageRoute(
             builder: (context) => const Notifactions(), settings: settings);
-      case WishList.routeName:
+      case WishListView.routeName:
         return MaterialPageRoute(
-            builder: (context) => const WishList(), settings: settings);
-
+            builder: (context) => const WishListView(), settings: settings);
+      case CustomBottomNavigationBar.routeName:
+        return MaterialPageRoute(
+            builder: (context) => const CustomBottomNavigationBar(),
+            settings: settings);
       default:
         return MaterialPageRoute(
             builder: (context) => const SplashView(), settings: settings);

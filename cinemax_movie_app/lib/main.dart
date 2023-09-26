@@ -1,5 +1,5 @@
 import 'package:cinemax_movie_app/Core/Constants/colors_const.dart';
-import 'package:cinemax_movie_app/Features/MostPopular/most_popular_view.dart';
+import 'package:cinemax_movie_app/Features/Onboarding/Splash/splash_view.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -22,7 +22,7 @@ class CINEMAXMovieApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: MostPopularView.routeName,
+      initialRoute: SplashView.routeName,
       onGenerateRoute: Routes.generateRoute,
       theme: ThemeData(
         scaffoldBackgroundColor: ConstColors.backgroundColor,

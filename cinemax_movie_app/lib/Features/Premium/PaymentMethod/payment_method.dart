@@ -7,14 +7,14 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class PaymentMethod extends StatefulWidget {
-  const PaymentMethod({super.key});
+class PaymentMethodView extends StatefulWidget {
+  const PaymentMethodView({super.key});
   static const String routeName = "PaymentMethod";
   @override
-  State<PaymentMethod> createState() => _PaymentMethodState();
+  State<PaymentMethodView> createState() => _PaymentMethodViewState();
 }
 
-class _PaymentMethodState extends State<PaymentMethod> {
+class _PaymentMethodViewState extends State<PaymentMethodView> {
   bool isActive = false;
   int? selectedIndex;
 

@@ -6,11 +6,12 @@ import 'package:cinemax_movie_app/Core/Shared/Customs/custom_main_button.dart';
 import 'package:cinemax_movie_app/Core/Shared/Customs/custom_text_form_field.dart';
 import 'package:cinemax_movie_app/Core/Shared/Functions/functions.dart';
 import 'package:cinemax_movie_app/Core/Shared/Validation/validation.dart';
-import 'package:cinemax_movie_app/Features/Home/home_view.dart';
 import 'package:cinemax_movie_app/Features/Onboarding/ResetPassword/reset_password_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../../../Core/Shared/widgets/bottom_navigation_bar.dart';
 
 class LogInView extends StatefulWidget {
   const LogInView({super.key});
@@ -123,7 +124,7 @@ class _LogInViewState extends State<LogInView> {
                           password: password!,
                         );
                         // ignore: use_build_context_synchronously
-                        Navigator.pushNamed(context, HomeView.routeName);
+                        Navigator.pushNamed(context, CustomBottomNavigationBar.routeName);
                       } on FirebaseAuthException catch (e) {
                         if (e.code == 'user-not-found') {
                           showSnackBar(

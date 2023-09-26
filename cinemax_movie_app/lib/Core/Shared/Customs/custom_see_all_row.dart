@@ -5,8 +5,11 @@ import '../../Constants/colors_const.dart';
 
 class CustomSeeAllRow extends StatelessWidget {
   const CustomSeeAllRow({
-    super.key, required this.text,
+    super.key,
+    required this.text,
+    required this.onPressed,
   });
+  final void Function()? onPressed;
   final String text;
   @override
   Widget build(BuildContext context) {
@@ -29,7 +32,7 @@ class CustomSeeAllRow extends StatelessWidget {
             ),
           ),
           TextButton(
-            onPressed: () {},
+            onPressed: onPressed,
             child: Text(
               'See All',
               style: GoogleFonts.montserrat(

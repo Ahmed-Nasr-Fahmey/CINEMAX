@@ -3,6 +3,8 @@ import 'package:cinemax_movie_app/Core/Constants/icon_const.dart';
 import 'package:cinemax_movie_app/Core/Shared/Customs/custom_app_bar.dart';
 import 'package:cinemax_movie_app/Core/Shared/Customs/custom_secound_button.dart';
 import 'package:cinemax_movie_app/Features/Profile/LanguageView/language_view.dart';
+import 'package:cinemax_movie_app/Features/Profile/Notification/notifactions.dart';
+import 'package:cinemax_movie_app/Features/Profile/Privacy/privacy_policy.dart';
 import 'package:flutter/material.dart';
 
 import '../../../Core/Shared/Customs/custom_divider.dart';
@@ -40,7 +42,9 @@ class ProfileView extends StatelessWidget {
                 ProfileOptions(
                   icon: ConstIcons.notificationIcon,
                   text: 'Notifications',
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, Notifactions.routeName);
+                  },
                 ),
                 const CustomDivider(),
                 ProfileOptions(
@@ -54,7 +58,9 @@ class ProfileView extends StatelessWidget {
                 ProfileOptions(
                   icon: ConstIcons.securityIcon,
                   text: 'Legal and Policies',
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, PrivacyPolicy.routeName);
+                  },
                 ),
                 const CustomDivider(),
                 ProfileOptions(

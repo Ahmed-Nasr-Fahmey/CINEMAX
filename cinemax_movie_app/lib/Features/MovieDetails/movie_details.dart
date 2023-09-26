@@ -40,6 +40,7 @@ class _MovieDetailsState extends State<MovieDetails> {
                   height: 550,
                 ),
                 Container(
+                  height: 550,
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
                       begin: Alignment.topLeft,
@@ -110,9 +111,10 @@ class _MovieDetailsState extends State<MovieDetails> {
                     "Episode",
                     style: GoogleFonts.montserrat(
                       textStyle: const TextStyle(
-                          color: ConstColors.whiteColor,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600),
+                        color: ConstColors.whiteColor,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                   ),
                   const DropDownList(),

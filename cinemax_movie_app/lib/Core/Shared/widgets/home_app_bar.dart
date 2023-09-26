@@ -1,4 +1,4 @@
-
+import 'package:cinemax_movie_app/Features/WishList/wish_list.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -13,8 +13,7 @@ class HomeAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(
-          top: 40, left: 24, right: 24, bottom: 20),
+      padding: const EdgeInsets.only(top: 40, left: 24, right: 24, bottom: 20),
       child: Row(
         children: [
           const CircleAvatar(
@@ -60,7 +59,9 @@ class HomeAppBar extends StatelessWidget {
             child: IconButton(
               padding: const EdgeInsets.all(0),
               icon: ConstIcons.solidLoveIcon,
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(context, WishListView.routeName);
+              },
             ),
           ),
         ],

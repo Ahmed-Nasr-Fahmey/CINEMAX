@@ -47,7 +47,7 @@ class MovieItem extends StatelessWidget {
             child: Icon(
               Icons.play_arrow,
               size: 32,
-              color: ConstColors.whitecolor,
+              color: ConstColors.whiteColor,
             ),
           ),
         ],
