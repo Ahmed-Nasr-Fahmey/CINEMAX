@@ -1,0 +1,24 @@
+import 'package:cinemax_movie_app/Core/Shared/Builders/movie_card_builder.dart';
+import 'package:cinemax_movie_app/Core/Shared/Customs/custom_app_bar.dart';
+import 'package:flutter/material.dart';
+
+class MostPopularView extends StatelessWidget {
+  const MostPopularView({super.key});
+  static const String routeName = 'MostPopularView';
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Column(
+          children: const [
+            CustomAppBar(
+              hasLoveIcon: false,
+              text: 'Most Popular Movies',
+            ),
+            MovieCardBuilder(),
+          ],
+        ),
+      ),
+    );
+  }
+}

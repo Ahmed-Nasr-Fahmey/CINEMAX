@@ -1,4 +1,10 @@
+import 'package:cinemax_movie_app/Features/Downloads/downloads_view.dart';
 import 'package:cinemax_movie_app/Features/Home/home_view.dart';
+import 'package:cinemax_movie_app/Features/MostPopular/most_popular_view.dart';
+import 'package:cinemax_movie_app/Features/Premium/PremiumAccount/premium_account_view.dart';
+import 'package:cinemax_movie_app/Features/Profile/LanguageView/language_view.dart';
+import 'package:cinemax_movie_app/Features/Profile/ProfileView/profile_view.dart';
+import 'package:cinemax_movie_app/Features/Search/SearchView/search_view.dart';
 import 'package:flutter/material.dart';
 import 'package:cinemax_movie_app/Features/OnBoarding/Splash/splash_view.dart';
 import 'package:cinemax_movie_app/Features/Onboarding/CreateNewPassword/create_new_password_view.dart';
@@ -49,6 +55,25 @@ class Routes {
       case HomeView.routeName:
         return MaterialPageRoute(
             builder: (context) => const HomeView(), settings: settings);
+      case ProfileView.routeName:
+        return MaterialPageRoute(
+            builder: (context) => const ProfileView(), settings: settings);
+      case LanguageView.routeName:
+        return MaterialPageRoute(
+            builder: (context) => const LanguageView(), settings: settings);
+      case DownloadsView.routeName:
+        return MaterialPageRoute(
+            builder: (context) => const DownloadsView(), settings: settings);
+      case PremiumAccountView.routeName:
+        return MaterialPageRoute(
+            builder: (context) => const PremiumAccountView(),
+            settings: settings);
+      case SearchView.routeName:
+        return MaterialPageRoute(
+            builder: (context) => const SearchView(), settings: settings);
+      case MostPopularView.routeName:
+        return MaterialPageRoute(
+            builder: (context) => const MostPopularView(), settings: settings);
       default:
         return MaterialPageRoute(
             builder: (context) => const SplashView(), settings: settings);

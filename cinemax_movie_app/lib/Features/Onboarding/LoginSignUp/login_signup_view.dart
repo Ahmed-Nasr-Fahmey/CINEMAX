@@ -116,7 +116,7 @@ class LoginSignUpView extends StatelessWidget {
                   width: 70,
                   height: 70,
                   decoration: BoxDecoration(
-                      color: ConstColors.whitecolor,
+                      color: ConstColors.whiteColor,
                       borderRadius: BorderRadius.circular(360)),
                   child: Padding(
                     padding: const EdgeInsets.all(22.0),

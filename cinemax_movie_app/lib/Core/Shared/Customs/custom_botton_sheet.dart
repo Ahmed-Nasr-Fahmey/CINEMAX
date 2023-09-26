@@ -24,7 +24,7 @@ class CustomBottomSheet extends StatelessWidget {
       width: MediaQuery.of(context).size.width - 2 * 24,
       height: 320,
       decoration: BoxDecoration(
-        color: ConstColors.blackcolor,
+        color: ConstColors.blackColor,
         borderRadius: BorderRadius.circular(32),
       ),
       child: Padding(
@@ -38,7 +38,7 @@ class CustomBottomSheet extends StatelessWidget {
                 style: GoogleFonts.montserrat(
                   textStyle: const TextStyle(
                     fontSize: 16,
-                    color: ConstColors.whitecolor,
+                    color: ConstColors.whiteColor,
                     fontWeight: FontWeight.w600,
                   ),
                 ),

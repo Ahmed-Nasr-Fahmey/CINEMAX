@@ -42,7 +42,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         label: Text(
           widget.lable,
           style: GoogleFonts.montserrat(
-            color: ConstColors.whitecolor,
+            color: ConstColors.whiteColor,
             fontSize: 14,
             fontWeight: FontWeight.w500,
             letterSpacing: 0.12,
