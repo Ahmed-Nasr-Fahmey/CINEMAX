@@ -49,13 +49,12 @@ class LoginSignUpView extends StatelessWidget {
                 fontWeight: FontWeight.w600),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 64, bottom: 34),
+            padding: const EdgeInsets.only(top: 64, bottom: 16),
             child: CustomMainButton(
-              text: "Sign Up",
-              onTap: () {
-                Navigator.pushNamed(context, SignUpView.routeName);
-              },
-            ),
+                text: "Sign Up",
+                onTap: () {
+                  Navigator.pushNamed(context, SignUpView.routeName);
+                }),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -89,7 +88,7 @@ class LoginSignUpView extends StatelessWidget {
                 Container(
                   width: 62,
                   height: 1,
-                  color: ConstColors.grayColor.withOpacity(0.2),
+                  color: const Color(0xFF252836),
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -104,7 +103,7 @@ class LoginSignUpView extends StatelessWidget {
                 Container(
                   width: 62,
                   height: 1,
-                  color: ConstColors.grayColor.withOpacity(0.2),
+                  color: const Color(0xFF252836),
                 )
               ],
             ),
@@ -116,7 +115,7 @@ class LoginSignUpView extends StatelessWidget {
                   width: 70,
                   height: 70,
                   decoration: BoxDecoration(
-                      color: ConstColors.whiteColor,
+                      color: const Color(0xFFF3F8FB),
                       borderRadius: BorderRadius.circular(360)),
                   child: Padding(
                     padding: const EdgeInsets.all(22.0),
@@ -132,7 +131,7 @@ class LoginSignUpView extends StatelessWidget {
                     width: 70,
                     height: 70,
                     decoration: BoxDecoration(
-                        color: ConstColors.grayColor.withOpacity(0.1),
+                        color: const Color(0xFF252836),
                         borderRadius: BorderRadius.circular(360)),
                     child: Padding(
                       padding: const EdgeInsets.all(22.0),
@@ -144,20 +143,19 @@ class LoginSignUpView extends StatelessWidget {
                     )),
               ),
               Container(
-                width: 70,
-                height: 70,
-                decoration: BoxDecoration(
-                    color: const Color(0xFF4267B2),
-                    borderRadius: BorderRadius.circular(360)),
-                child: Padding(
-                  padding: const EdgeInsets.all(22.0),
-                  child: Image.asset(
-                    'Assets/images/Facebook.png',
-                    width: 24,
-                    height: 24,
-                  ),
-                ),
-              ),
+                  width: 70,
+                  height: 70,
+                  decoration: BoxDecoration(
+                      color: const Color(0xFF4267B2),
+                      borderRadius: BorderRadius.circular(360)),
+                  child: Padding(
+                    padding: const EdgeInsets.all(22.0),
+                    child: Image.asset(
+                      'Assets/images/Facebook.png',
+                      width: 24,
+                      height: 24,
+                    ),
+                  ))
             ],
           )
         ],
