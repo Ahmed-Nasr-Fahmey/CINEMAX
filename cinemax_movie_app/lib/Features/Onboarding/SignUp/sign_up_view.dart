@@ -5,11 +5,9 @@ import 'package:cinemax_movie_app/Core/Shared/Customs/custom_main_button.dart';
 import 'package:cinemax_movie_app/Core/Shared/Customs/custom_text_form_field.dart';
 import 'package:cinemax_movie_app/Core/Shared/Functions/functions.dart';
 import 'package:cinemax_movie_app/Core/Shared/Validation/validation.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../Core/Helper/show_snack_bar.dart';
 import '../../../Core/Shared/widgets/bottom_navigation_bar.dart';
 
 class SignUpView extends StatefulWidget {
@@ -23,8 +21,6 @@ class SignUpView extends StatefulWidget {
 }
 
 class _SignUpViewState extends State<SignUpView> {
-  String? emailAddress;
-  String? password;
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
 
   @override
@@ -87,9 +83,6 @@ class _SignUpViewState extends State<SignUpView> {
                   padding:
                       const EdgeInsets.only(left: 24, right: 24, bottom: 24),
                   child: CustomTextFormField(
-                    onChanged: (value) {
-                      emailAddress = value;
-                    },
                     suffixIcon: null,
                     validator: (value) {
                       return Validation.emailValidation(value);
@@ -102,9 +95,6 @@ class _SignUpViewState extends State<SignUpView> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24),
                   child: CustomTextFormField(
-                    onChanged: (value) {
-                      password = value;
-                    },
                     suffixIcon: ConstIcons.solidEyeSlashIcon,
                     validator: (value) {
                       return Validation.passwordValidation(value);
@@ -119,28 +109,10 @@ class _SignUpViewState extends State<SignUpView> {
                 ),
                 CustomMainButton(
                     text: "Sign Up",
-                    onTap: () async {
+                    onTap: () {
                       if (SignUpView._formKey.currentState!.validate()) {
-                        try {
-                          await FirebaseAuth.instance
-                              .createUserWithEmailAndPassword(
-                            email: emailAddress!,
-                            password: password!,
-                          );
-                          // ignore: use_build_context_synchronously
-                          Navigator.pushNamed(
-                              context, CustomBottomNavigationBar.routeName);
-                        } on FirebaseAuthException catch (e) {
-                          if (e.code == 'weak-password') {
-                            showSnackBar(
-                                context, 'The password provided is too weak.');
-                          } else if (e.code == 'email-already-in-use') {
-                            showSnackBar(context,
-                                'The account already exists for that email.');
-                          }
-                        } catch (e) {
-                          showSnackBar(context, 'ther was an erorr');
-                        }
+                        Navigator.pushNamed(
+                            context, CustomBottomNavigationBar.routeName);
                       } else {
                         setState(
                           () {
