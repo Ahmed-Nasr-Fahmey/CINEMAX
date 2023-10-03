@@ -5,9 +5,11 @@ import 'package:cinemax_movie_app/Features/Onboarding/SignUp/sign_up_view.dart';
 import 'package:cinemax_movie_app/core/constants/colors_const.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+
 class LoginSignUpView extends StatelessWidget {
   const LoginSignUpView({super.key});
   static const String routeName = "LoginSignUpView";
@@ -114,11 +116,11 @@ class LoginSignUpView extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               GestureDetector(
-                onTap: ()async{
-                   await signInWithGoogle();
-                 // ignore: use_build_context_synchronously
-                 Navigator.pushNamed(context, CustomBottomNavigationBar.routeName);
-
+                onTap: () async {
+                  await signInWithGoogle();
+                  // ignore: use_build_context_synchronously
+                  Navigator.pushNamed(
+                      context, CustomBottomNavigationBar.routeName);
                 },
                 child: Container(
                     width: 70,
@@ -152,18 +154,26 @@ class LoginSignUpView extends StatelessWidget {
                       ),
                     )),
               ),
-              Container(
-                width: 70,
-                height: 70,
-                decoration: BoxDecoration(
-                    color: const Color(0xFF4267B2),
-                    borderRadius: BorderRadius.circular(360)),
-                child: Padding(
-                  padding: const EdgeInsets.all(22.0),
-                  child: Image.asset(
-                    'Assets/images/Facebook.png',
-                    width: 24,
-                    height: 24,
+              GestureDetector(
+                onTap: () async {
+                  await signInWithFacebook();
+                  // ignore: use_build_context_synchronously
+                  Navigator.pushNamed(
+                      context, CustomBottomNavigationBar.routeName);
+                },
+                child: Container(
+                  width: 70,
+                  height: 70,
+                  decoration: BoxDecoration(
+                      color: const Color(0xFF4267B2),
+                      borderRadius: BorderRadius.circular(360)),
+                  child: Padding(
+                    padding: const EdgeInsets.all(22.0),
+                    child: Image.asset(
+                      'Assets/images/Facebook.png',
+                      width: 24,
+                      height: 24,
+                    ),
                   ),
                 ),
               )
@@ -175,12 +185,25 @@ class LoginSignUpView extends StatelessWidget {
   }
 }
 
+Future<UserCredential> signInWithFacebook() async {
+  // Trigger the sign-in flow
+  final LoginResult loginResult = await FacebookAuth.instance.login();
+
+  // Create a credential from the access token
+  final OAuthCredential facebookAuthCredential =
+      FacebookAuthProvider.credential(loginResult.accessToken!.token);
+
+  // Once signed in, return the UserCredential
+  return FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
+}
+
 Future<UserCredential> signInWithGoogle() async {
   // Trigger the authentication flow
   final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
   // Obtain the auth details from the request
-  final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+  final GoogleSignInAuthentication? googleAuth =
+      await googleUser?.authentication;
 
   // Create a new credential
   final credential = GoogleAuthProvider.credential(
