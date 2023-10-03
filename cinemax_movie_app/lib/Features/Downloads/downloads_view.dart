@@ -7,9 +7,9 @@ class DownloadsView extends StatelessWidget {
   static const String routeName = 'DownloadsView';
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Column(
-        children: const [
+        children: [
           CustomAppBar(
             hasLoveIcon: false,
             text: 'Downloads',

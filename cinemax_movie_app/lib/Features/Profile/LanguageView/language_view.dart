@@ -9,9 +9,9 @@ class LanguageView extends StatelessWidget {
   static const String routeName = 'LanguageView';
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Column(
-        children: const [
+        children: [
           CustomAppBar(
             hasLoveIcon: false,
             text: 'Language',

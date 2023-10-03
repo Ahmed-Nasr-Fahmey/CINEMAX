@@ -7,10 +7,10 @@ class MostPopularView extends StatelessWidget {
   static const String routeName = 'MostPopularView';
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: SingleChildScrollView(
         child: Column(
-          children: const [
+          children: [
             CustomAppBar(
               hasLoveIcon: false,
               text: 'Most Popular Movies',

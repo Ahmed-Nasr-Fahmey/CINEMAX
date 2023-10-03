@@ -127,13 +127,16 @@ class _LogInViewState extends State<LogInView> {
                         Navigator.pushNamed(context, CustomBottomNavigationBar.routeName);
                       } on FirebaseAuthException catch (e) {
                         if (e.code == 'user-not-found') {
+                          // ignore: use_build_context_synchronously
                           showSnackBar(
                               context, 'No user found for that email.');
                         } else if (e.code == 'wrong-password') {
+                          // ignore: use_build_context_synchronously
                           showSnackBar(context,
                               'Wrong password provided for that user.');
                         }
                       } catch (e) {
+                        // ignore: use_build_context_synchronously
                         showSnackBar(context, 'ther was an erorr');
                       }
                     } else {

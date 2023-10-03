@@ -157,14 +157,14 @@ class CustomMovieCard extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Positioned(
+                    const Positioned(
                       left: 0,
                       top: 64,
                       child: SizedBox(
                         width: 100,
                         height: 40,
                         child: Stack(
-                          children: const [
+                          children: [
                             Icon(
                               Icons.calendar_month,
                               color: ConstColors.grayColor,
@@ -189,14 +189,14 @@ class CustomMovieCard extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Positioned(
+                    const Positioned(
                       left: 0,
                       top: 94,
                       child: SizedBox(
                         width: 120,
                         height: 16,
                         child: Stack(
-                          children: const [
+                          children: [
                             Icon(
                               Icons.watch_later,
                               color: ConstColors.grayColor,
@@ -221,14 +221,14 @@ class CustomMovieCard extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Positioned(
+                    const Positioned(
                       left: 0,
                       top: 122,
                       child: SizedBox(
                         width: 130,
                         height: 16,
                         child: Stack(
-                          children: const [
+                          children: [
                             Icon(
                               Icons.theaters,
                               color: ConstColors.grayColor,

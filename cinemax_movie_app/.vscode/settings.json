@@ -2,5 +2,6 @@
     "cSpell.words": [
         "autovalidate"
     ],
-    "cmake.sourceDirectory": "D:/mostaaballlaaaak/FlutterProjects/CINEMAX/cinemax_movie_app/windows/runner"
+    "cmake.sourceDirectory": "D:/mostaaballlaaaak/FlutterProjects/CINEMAX/cinemax_movie_app/windows/runner",
+    "java.configuration.updateBuildConfiguration": "interactive"
 }

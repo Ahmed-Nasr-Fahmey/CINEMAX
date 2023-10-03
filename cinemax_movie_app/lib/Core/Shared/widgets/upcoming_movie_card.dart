@@ -9,8 +9,8 @@ class MovieFullCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: const [
+    return const Column(
+      children: [
         MovieItem(),
         MovieDescription(),
       ],

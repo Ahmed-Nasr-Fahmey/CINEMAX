@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-
 class LoginSignUpView extends StatelessWidget {
   const LoginSignUpView({super.key});
   static const String routeName = "LoginSignUpView";
@@ -117,6 +116,7 @@ class LoginSignUpView extends StatelessWidget {
               GestureDetector(
                 onTap: ()async{
                    await signInWithGoogle();
+                 // ignore: use_build_context_synchronously
                  Navigator.pushNamed(context, CustomBottomNavigationBar.routeName);
 
                 },
@@ -174,6 +174,7 @@ class LoginSignUpView extends StatelessWidget {
     );
   }
 }
+
 Future<UserCredential> signInWithGoogle() async {
   // Trigger the authentication flow
   final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();

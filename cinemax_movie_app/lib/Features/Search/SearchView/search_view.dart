@@ -11,10 +11,10 @@ class SearchView extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => GlobalFunctions.unFocusTextFieldsWhenClickOutSide(context),
-      child: Scaffold(
+      child: const Scaffold(
         body: SingleChildScrollView(
           child: Column(
-            children: const [
+            children: [
               SizedBox(
                 height: 40,
               ),
