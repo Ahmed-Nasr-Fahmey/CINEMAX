@@ -5,6 +5,7 @@ import 'package:cinemax_movie_app/Features/Onboarding/CreateNewPassword/create_n
 import 'package:cinemax_movie_app/core/constants/colors_const.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 class VerificationView extends StatefulWidget {
   const VerificationView({super.key});
@@ -119,8 +120,14 @@ class _VerificationViewState extends State<VerificationView> {
                 onTap: () {
                   if (VerificationView._formKey.currentState!.validate()) {
                     VerificationView._formKey.currentState!.save();
-                    Navigator.pushNamed(
-                        context, CreateNewPasswordView.routeName);
+                    PersistentNavBarNavigator.pushNewScreenWithRouteSettings(
+                    context,
+                    settings:
+                        const RouteSettings(name: CreateNewPasswordView.routeName),
+                    screen: const CreateNewPasswordView(),
+                    withNavBar: true,
+                    pageTransitionAnimation: PageTransitionAnimation.cupertino,
+                  );
                   } else {
                     setState(() {
                       autovalidateMode = AutovalidateMode.always;

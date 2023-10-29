@@ -1,17 +1,16 @@
 import 'package:cinemax_movie_app/Core/Constants/colors_const.dart';
 import 'package:cinemax_movie_app/Core/Constants/icon_const.dart';
-import 'package:cinemax_movie_app/Core/Helper/show_snack_bar.dart';
 import 'package:cinemax_movie_app/Core/Shared/Customs/custom_app_bar.dart';
 import 'package:cinemax_movie_app/Core/Shared/Customs/custom_main_button.dart';
 import 'package:cinemax_movie_app/Core/Shared/Customs/custom_text_form_field.dart';
 import 'package:cinemax_movie_app/Core/Shared/Functions/functions.dart';
 import 'package:cinemax_movie_app/Core/Shared/Validation/validation.dart';
 import 'package:cinemax_movie_app/Features/Onboarding/ResetPassword/reset_password_view.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cinemax_movie_app/StateManagement/Cubits/UserCubit/user_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-import '../../../Core/Shared/widgets/bottom_navigation_bar.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 class LogInView extends StatefulWidget {
   const LogInView({super.key});
@@ -24,8 +23,7 @@ class LogInView extends StatefulWidget {
 
 class _LogInViewState extends State<LogInView> {
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
-  String? emailAddress;
-  String? password;
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -67,7 +65,8 @@ class _LogInViewState extends State<LogInView> {
                       top: 72, left: 24, right: 24, bottom: 32),
                   child: CustomTextFormField(
                     onChanged: (value) {
-                      emailAddress = value;
+                      BlocProvider.of<UserCubit>(context).userModel.userEmail =
+                          value;
                     },
                     suffixIcon: null,
                     validator: (value) {
@@ -82,7 +81,9 @@ class _LogInViewState extends State<LogInView> {
                   padding: const EdgeInsets.symmetric(horizontal: 24),
                   child: CustomTextFormField(
                     onChanged: (value) {
-                      password = value;
+                      BlocProvider.of<UserCubit>(context)
+                          .userModel
+                          .userPassword = value;
                     },
                     suffixIcon: ConstIcons.solidEyeSlashIcon,
                     validator: (value) {
@@ -100,17 +101,26 @@ class _LogInViewState extends State<LogInView> {
                       padding:
                           const EdgeInsets.only(top: 24, bottom: 40, right: 24),
                       child: GestureDetector(
-                          onTap: () {
-                            Navigator.pushNamed(
-                                context, ResetPasswordView.routeName);
-                          },
-                          child: Text(
-                            "Forgot Password?",
-                            style: GoogleFonts.montserrat(
-                                color: ConstColors.primaryColor,
-                                fontSize: 12,
-                                fontWeight: FontWeight.w600),
-                          )),
+                        onTap: () {
+                          PersistentNavBarNavigator
+                              .pushNewScreenWithRouteSettings(
+                            context,
+                            settings: const RouteSettings(
+                                name: ResetPasswordView.routeName),
+                            screen: const ResetPasswordView(),
+                            withNavBar: true,
+                            pageTransitionAnimation:
+                                PageTransitionAnimation.cupertino,
+                          );
+                        },
+                        child: Text(
+                          "Forgot Password?",
+                          style: GoogleFonts.montserrat(
+                              color: ConstColors.primaryColor,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w600),
+                        ),
+                      ),
                     ),
                   ],
                 ),
@@ -118,27 +128,8 @@ class _LogInViewState extends State<LogInView> {
                   text: "Login",
                   onTap: () async {
                     if (LogInView._formKey.currentState!.validate()) {
-                      try {
-                        await FirebaseAuth.instance.signInWithEmailAndPassword(
-                          email: emailAddress!,
-                          password: password!,
-                        );
-                        // ignore: use_build_context_synchronously
-                        Navigator.pushNamed(context, CustomBottomNavigationBar.routeName);
-                      } on FirebaseAuthException catch (e) {
-                        if (e.code == 'user-not-found') {
-                          // ignore: use_build_context_synchronously
-                          showSnackBar(
-                              context, 'No user found for that email.');
-                        } else if (e.code == 'wrong-password') {
-                          // ignore: use_build_context_synchronously
-                          showSnackBar(context,
-                              'Wrong password provided for that user.');
-                        }
-                      } catch (e) {
-                        // ignore: use_build_context_synchronously
-                        showSnackBar(context, 'ther was an erorr');
-                      }
+                      await BlocProvider.of<UserCubit>(context)
+                          .signInWithEmailAndPassword(context);
                     } else {
                       setState(
                         () {

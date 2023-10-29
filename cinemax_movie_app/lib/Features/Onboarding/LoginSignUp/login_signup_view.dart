@@ -9,6 +9,7 @@ import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 class LoginSignUpView extends StatelessWidget {
   const LoginSignUpView({super.key});
@@ -57,7 +58,13 @@ class LoginSignUpView extends StatelessWidget {
             child: CustomMainButton(
                 text: "Sign Up",
                 onTap: () {
-                  Navigator.pushNamed(context, SignUpView.routeName);
+                  PersistentNavBarNavigator.pushNewScreenWithRouteSettings(
+                    context,
+                    settings: const RouteSettings(name: SignUpView.routeName),
+                    screen: const SignUpView(),
+                    withNavBar: true,
+                    pageTransitionAnimation: PageTransitionAnimation.cupertino,
+                  );
                 }),
           ),
           Row(
@@ -72,7 +79,13 @@ class LoginSignUpView extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () {
-                  Navigator.pushNamed(context, LogInView.routeName);
+                  PersistentNavBarNavigator.pushNewScreenWithRouteSettings(
+                    context,
+                    settings: const RouteSettings(name: LogInView.routeName),
+                    screen: const LogInView(),
+                    withNavBar: true,
+                    pageTransitionAnimation: PageTransitionAnimation.cupertino,
+                  );
                 },
                 child: Text(
                   "Login",
@@ -119,8 +132,14 @@ class LoginSignUpView extends StatelessWidget {
                 onTap: () async {
                   await signInWithGoogle();
                   // ignore: use_build_context_synchronously
-                  Navigator.pushNamed(
-                      context, CustomBottomNavigationBar.routeName);
+                  PersistentNavBarNavigator.pushNewScreenWithRouteSettings(
+                    context,
+                    settings: const RouteSettings(
+                        name: CustomBottomNavigationBar.routeName),
+                    screen: const CustomBottomNavigationBar(),
+                    withNavBar: true,
+                    pageTransitionAnimation: PageTransitionAnimation.cupertino,
+                  );
                 },
                 child: Container(
                     width: 70,
@@ -158,8 +177,14 @@ class LoginSignUpView extends StatelessWidget {
                 onTap: () async {
                   await signInWithFacebook();
                   // ignore: use_build_context_synchronously
-                  Navigator.pushNamed(
-                      context, CustomBottomNavigationBar.routeName);
+                  PersistentNavBarNavigator.pushNewScreenWithRouteSettings(
+                    context,
+                    settings: const RouteSettings(
+                        name: CustomBottomNavigationBar.routeName),
+                    screen: const CustomBottomNavigationBar(),
+                    withNavBar: true,
+                    pageTransitionAnimation: PageTransitionAnimation.cupertino,
+                  );
                 },
                 child: Container(
                   width: 70,

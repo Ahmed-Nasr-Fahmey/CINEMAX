@@ -1,21 +1,23 @@
 import 'package:cinemax_movie_app/Core/Constants/colors_const.dart';
+import 'package:cinemax_movie_app/Core/Models/MovieModel/movie_model.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class MovieDescription extends StatelessWidget {
   const MovieDescription({
     super.key,
+    required this.movieModel,
   });
-
+  final MovieModel movieModel;
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 12),
+      padding: const EdgeInsets.only(top: 12, left: 16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Black Panther: Wakanda Forever",
+            movieModel.movieName,
             textAlign: TextAlign.start,
             style: GoogleFonts.montserrat(
               textStyle: const TextStyle(

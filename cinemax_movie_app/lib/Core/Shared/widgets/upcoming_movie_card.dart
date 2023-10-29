@@ -1,18 +1,20 @@
+import 'package:cinemax_movie_app/Core/Models/MovieModel/movie_model.dart';
 import 'package:cinemax_movie_app/Core/Shared/widgets/movie_item.dart';
 import 'package:cinemax_movie_app/Core/Shared/widgets/upcoming_movie_description.dart';
 import 'package:flutter/material.dart';
 
 class MovieFullCard extends StatelessWidget {
   const MovieFullCard({
-    super.key,
+    super.key, required this.movieModel,
   });
-
+  final MovieModel movieModel;
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
+      
       children: [
-        MovieItem(),
-        MovieDescription(),
+        MovieItem(movieModel: movieModel),
+        MovieDescription(movieModel: movieModel),
       ],
     );
   }

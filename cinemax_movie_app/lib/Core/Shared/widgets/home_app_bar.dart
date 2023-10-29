@@ -1,6 +1,9 @@
 import 'package:cinemax_movie_app/Features/WishList/wish_list.dart';
+import 'package:cinemax_movie_app/StateManagement/Cubits/UserCubit/user_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 import '../../Constants/colors_const.dart';
 import '../../Constants/icon_const.dart';
@@ -16,9 +19,9 @@ class HomeAppBar extends StatelessWidget {
       padding: const EdgeInsets.only(top: 40, left: 24, right: 24, bottom: 20),
       child: Row(
         children: [
-          const CircleAvatar(
+          CircleAvatar(
             backgroundImage: NetworkImage(
-              'https://scontent.fcai22-1.fna.fbcdn.net/v/t39.30808-6/351356037_1121650665225980_8313024570362431221_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=a2f6c7&_nc_ohc=I5qlFaGkM7wAX9rOc-u&_nc_ht=scontent.fcai22-1.fna&oh=00_AfAfCtWwymprX0jnASWuU7iCMwDrFZ5PYjwYaXW2q25ckQ&oe=65170EAA',
+              BlocProvider.of<UserCubit>(context).userModel.userImageUrl!,
               scale: 34,
             ),
           ),
@@ -60,7 +63,13 @@ class HomeAppBar extends StatelessWidget {
               padding: const EdgeInsets.all(0),
               icon: ConstIcons.solidLoveIcon,
               onPressed: () {
-                Navigator.pushNamed(context, WishListView.routeName);
+                PersistentNavBarNavigator.pushNewScreenWithRouteSettings(
+                  context,
+                  settings: const RouteSettings(name: WishListView.routeName),
+                  screen: const WishListView(),
+                  withNavBar: true,
+                  pageTransitionAnimation: PageTransitionAnimation.cupertino,
+                );
               },
             ),
           ),

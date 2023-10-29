@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -7,13 +6,15 @@ import '../../Constants/colors_const.dart';
 class CustomSearchTextField extends StatelessWidget {
   const CustomSearchTextField({
     super.key,
+    required this.onChanged,
   });
-
+  final void Function(String)? onChanged;
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24),
       child: TextField(
+        onChanged: onChanged,
         style: GoogleFonts.montserrat(
           color: ConstColors.grayColor,
           fontSize: 14,
@@ -31,8 +32,7 @@ class CustomSearchTextField extends StatelessWidget {
             fontWeight: FontWeight.w500,
             letterSpacing: 0.12,
           ),
-          prefixIcon:
-              const Icon(Icons.search, color: ConstColors.grayColor),
+          prefixIcon: const Icon(Icons.search, color: ConstColors.grayColor),
           suffixIcon: const Icon(
             Icons.filter_list,
             color: ConstColors.whiteColor,

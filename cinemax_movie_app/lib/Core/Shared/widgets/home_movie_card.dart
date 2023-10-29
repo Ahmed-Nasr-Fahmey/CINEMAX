@@ -1,21 +1,32 @@
 import 'dart:ui';
 
+import 'package:cinemax_movie_app/Core/Models/MovieModel/movie_model.dart';
+import 'package:cinemax_movie_app/Core/Services/API/cinemax_api.dart';
 import 'package:cinemax_movie_app/Features/MovieDetails/movie_details.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 import '../../Constants/colors_const.dart';
 
 class HomeMovieCard extends StatelessWidget {
   const HomeMovieCard({
     super.key,
+    required this.movieModel,
   });
-
+  final MovieModel movieModel;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, MovieDetails.routeName);
+        PersistentNavBarNavigator.pushNewScreenWithRouteSettings(
+          context,
+          settings: RouteSettings(
+              name: MovieDetails.routeName, arguments: movieModel),
+          screen: const MovieDetails(),
+          withNavBar: true,
+          pageTransitionAnimation: PageTransitionAnimation.cupertino,
+        );
       },
       child: SizedBox(
         width: 135,
@@ -35,13 +46,14 @@ class HomeMovieCard extends StatelessWidget {
             Container(
               width: 135,
               height: 178,
-              decoration: const ShapeDecoration(
+              decoration: ShapeDecoration(
                 image: DecorationImage(
                   image: NetworkImage(
-                      'https://upload.wikimedia.org/wikipedia/en/2/21/Web_of_Spider-Man_Vol_1_129-1.png'),
+                    '${API.imageBaseUrl}${movieModel.movieImageUrl}',
+                  ),
                   fit: BoxFit.fill,
                 ),
-                shape: RoundedRectangleBorder(
+                shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(12),
                     topRight: Radius.circular(12),
@@ -55,7 +67,7 @@ class HomeMovieCard extends StatelessWidget {
               child: SizedBox(
                 width: 119,
                 child: Text(
-                  'Spider-Man No ..',
+                  movieModel.movieName,
                   overflow: TextOverflow.ellipsis,
                   style: GoogleFonts.montserrat(
                     color: ConstColors.whiteColor,
@@ -105,7 +117,9 @@ class HomeMovieCard extends StatelessWidget {
                         ),
                         const SizedBox(width: 4),
                         Text(
-                          '4.5',
+                          '${movieModel.movieRate}'.length > 3
+                              ? '${movieModel.movieRate}'.substring(0, 3)
+                              : '${movieModel.movieRate}',
                           style: GoogleFonts.montserrat(
                             color: ConstColors.premiumColor,
                             fontSize: 12,

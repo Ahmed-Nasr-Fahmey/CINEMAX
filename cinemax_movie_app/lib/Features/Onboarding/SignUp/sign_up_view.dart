@@ -5,10 +5,11 @@ import 'package:cinemax_movie_app/Core/Shared/Customs/custom_main_button.dart';
 import 'package:cinemax_movie_app/Core/Shared/Customs/custom_text_form_field.dart';
 import 'package:cinemax_movie_app/Core/Shared/Functions/functions.dart';
 import 'package:cinemax_movie_app/Core/Shared/Validation/validation.dart';
+import 'package:cinemax_movie_app/StateManagement/Cubits/UserCubit/user_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../Core/Shared/widgets/bottom_navigation_bar.dart';
 
 class SignUpView extends StatefulWidget {
   const SignUpView({super.key});
@@ -77,6 +78,10 @@ class _SignUpViewState extends State<SignUpView> {
                     obscureText: false,
                     isPassword: false,
                     lable: 'Full name',
+                    onChanged: (value) {
+                      BlocProvider.of<UserCubit>(context).userModel.userName =
+                          value;
+                    },
                   ),
                 ),
                 Padding(
@@ -90,6 +95,10 @@ class _SignUpViewState extends State<SignUpView> {
                     obscureText: false,
                     isPassword: false,
                     lable: 'Email Address',
+                    onChanged: (value) {
+                      BlocProvider.of<UserCubit>(context).userModel.userEmail =
+                          value;
+                    },
                   ),
                 ),
                 Padding(
@@ -102,25 +111,31 @@ class _SignUpViewState extends State<SignUpView> {
                     obscureText: true,
                     isPassword: true,
                     lable: 'Password',
+                    onChanged: (value) {
+                      BlocProvider.of<UserCubit>(context)
+                          .userModel
+                          .userPassword = value;
+                    },
                   ),
                 ),
                 const SizedBox(
                   height: 40,
                 ),
                 CustomMainButton(
-                    text: "Sign Up",
-                    onTap: () {
-                      if (SignUpView._formKey.currentState!.validate()) {
-                        Navigator.pushNamed(
-                            context, CustomBottomNavigationBar.routeName);
-                      } else {
-                        setState(
-                          () {
-                            autovalidateMode = AutovalidateMode.always;
-                          },
-                        );
-                      }
-                    })
+                  text: "Sign Up",
+                  onTap: () async {
+                    if (SignUpView._formKey.currentState!.validate()) {
+                      await BlocProvider.of<UserCubit>(context)
+                          .createUserWithEmailAndPassword(context);
+                    } else {
+                      setState(
+                        () {
+                          autovalidateMode = AutovalidateMode.always;
+                        },
+                      );
+                    }
+                  },
+                )
               ],
             ),
           ),

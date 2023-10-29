@@ -5,8 +5,10 @@ import 'package:cinemax_movie_app/Core/Shared/Customs/custom_main_button.dart';
 import 'package:cinemax_movie_app/Core/Shared/Customs/custom_text_form_field.dart';
 import 'package:cinemax_movie_app/Core/Shared/Functions/functions.dart';
 import 'package:cinemax_movie_app/Core/Shared/Validation/validation.dart';
-import 'package:cinemax_movie_app/Features/Onboarding/Verification/verification_view.dart';
+import 'package:cinemax_movie_app/StateManagement/Cubits/UserCubit/user_cubit.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class EditProfileView extends StatefulWidget {
@@ -20,7 +22,8 @@ class EditProfileView extends StatefulWidget {
 
 class _EditProfileViewState extends State<EditProfileView> {
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
-
+  String? userEmail;
+  String? userPassword;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -37,33 +40,34 @@ class _EditProfileViewState extends State<EditProfileView> {
                 children: [
                   Stack(
                     children: [
-                      Image.asset(
-                        "Assets/images/EditProfile.png",
-                        width: 100,
-                        height: 100,
+                      const CircleAvatar(
+                        radius: 80,
+                        backgroundImage: NetworkImage(
+                          'https://scontent.fcai22-1.fna.fbcdn.net/v/t39.30808-1/351356037_1121650665225980_8313024570362431221_n.jpg?stp=dst-jpg_p240x240&_nc_cat=103&ccb=1-7&_nc_sid=5f2048&_nc_ohc=DbvJRucsstkAX8JOzXT&_nc_ht=scontent.fcai22-1.fna&oh=00_AfBiG11wi5fDfAqLZadEKesdeRx_g1jEB1NXLv6MBqj26Q&oe=653EBB2C',
+                        ),
                       ),
                       Positioned(
-                        right: 10,
-                        bottom: 10,
+                        right: 2,
+                        bottom: 2,
                         child: Container(
-                            width: 32,
-                            height: 32,
+                            width: 40,
+                            height: 40,
                             decoration: BoxDecoration(
                                 color: const Color(0xFF252836),
                                 borderRadius: BorderRadius.circular(360))),
                       ),
                       const Positioned(
-                          bottom: 20,
-                          right: 20,
+                          bottom: 10,
+                          right: 10,
                           child: Icon(
                             Icons.edit,
-                            size: 12,
+                            size: 24,
                             color: ConstColors.primaryColor,
                           ))
                     ],
                   ),
                   Text(
-                    "Tiffany",
+                    "Ahmed Nasr",
                     style: GoogleFonts.montserrat(
                       textStyle: const TextStyle(
                           color: ConstColors.whiteColor,
@@ -75,7 +79,7 @@ class _EditProfileViewState extends State<EditProfileView> {
                     height: 8,
                   ),
                   Text(
-                    "Tiffanyjearsey@gmail.com",
+                    "${FirebaseAuth.instance.currentUser!.email}",
                     style: GoogleFonts.montserrat(
                       textStyle: const TextStyle(
                           color: Color(0xFFB1B1B1),
@@ -106,6 +110,9 @@ class _EditProfileViewState extends State<EditProfileView> {
                       obscureText: false,
                       isPassword: false,
                       lable: 'Email Address',
+                      onChanged: (value) {
+                        userEmail = value;
+                      },
                     ),
                   ),
                   Padding(
@@ -118,6 +125,9 @@ class _EditProfileViewState extends State<EditProfileView> {
                       obscureText: true,
                       isPassword: true,
                       lable: 'Password',
+                      onChanged: (value) {
+                        userPassword = value;
+                      },
                     ),
                   ),
                   Padding(
@@ -132,10 +142,15 @@ class _EditProfileViewState extends State<EditProfileView> {
                   ),
                   CustomMainButton(
                     text: 'Next',
-                    onTap: () {
+                    onTap: () async {
                       if (EditProfileView._formKey.currentState!.validate()) {
-                        Navigator.pushNamed(
-                            context, VerificationView.routeName);
+                        await BlocProvider.of<UserCubit>(context)
+                            .updateUserProfile(
+                          context: context,
+                          userEmail: userEmail,
+                          userPassword: userPassword,
+                        );
+                        setState(() {});
                       } else {
                         setState(
                           () {

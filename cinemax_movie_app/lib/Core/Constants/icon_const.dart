@@ -24,6 +24,11 @@ class ConstIcons {
     size: 20,
     color: Color(0xffFB4141),
   );
+  static const Widget shieldLoveIcon = FaIcon(
+    FontAwesomeIcons.heart,
+    size: 20,
+    color: Color(0xffFB4141),
+  );
   static const Widget editIcon = FaIcon(
     FontAwesomeIcons.penToSquare,
     size: 20,
@@ -59,5 +64,4 @@ class ConstIcons {
     size: 20,
     color: ConstColors.grayColor,
   );
-  
 }

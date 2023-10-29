@@ -1,17 +1,18 @@
-
+import 'package:cinemax_movie_app/Core/Models/MovieModel/movie_model.dart';
 import 'package:flutter/material.dart';
-
 import '../../widgets/home_banner_item.dart';
 import '../../widgets/indicator.dart';
 
 class HomeBunnerItemsBuilder extends StatefulWidget {
-  const HomeBunnerItemsBuilder({super.key});
-
+  const HomeBunnerItemsBuilder({super.key, required this.moviesList});
+  final List<MovieModel> moviesList;
   @override
   State<HomeBunnerItemsBuilder> createState() => _HomeBunnerItemsBuilderState();
 }
 
 class _HomeBunnerItemsBuilderState extends State<HomeBunnerItemsBuilder> {
+  
+
   int selectedItem = 2;
   @override
   Widget build(BuildContext context) {
@@ -32,14 +33,14 @@ class _HomeBunnerItemsBuilderState extends State<HomeBunnerItemsBuilder> {
                 selectedItem = index;
               });
             },
-            itemCount: 5,
+            itemCount: widget.moviesList.length,
             itemBuilder: (context, index) {
               var scale = selectedItem == index ? 1.1 : 0.8;
               return TweenAnimationBuilder(
                 curve: Curves.ease,
                 duration: const Duration(milliseconds: 350),
                 tween: Tween(begin: scale, end: scale),
-                child: const HomeBannerItem(),
+                child: HomeBannerItem(movieModel: widget.moviesList[index]),
                 builder: (context, value, child) {
                   return Transform.scale(
                     scale: value.toDouble(),

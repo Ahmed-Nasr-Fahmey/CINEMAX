@@ -6,6 +6,7 @@ import 'package:cinemax_movie_app/Core/Shared/Validation/validation.dart';
 import 'package:cinemax_movie_app/Features/Onboarding/Verification/verification_view.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 import '../../../Core/Shared/Customs/custom_app_bar.dart';
 
@@ -80,7 +81,15 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
                   text: 'Next',
                   onTap: () {
                     if (ResetPasswordView._formKey.currentState!.validate()) {
-                      Navigator.pushNamed(context, VerificationView.routeName);
+                      PersistentNavBarNavigator.pushNewScreenWithRouteSettings(
+                        context,
+                        settings: const RouteSettings(
+                            name: VerificationView.routeName),
+                        screen: const VerificationView(),
+                        withNavBar: true,
+                        pageTransitionAnimation:
+                            PageTransitionAnimation.cupertino,
+                      );
                     } else {
                       setState(
                         () {

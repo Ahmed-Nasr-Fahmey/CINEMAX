@@ -1,27 +1,39 @@
+import 'package:cinemax_movie_app/Core/Models/MovieModel/movie_model.dart';
+import 'package:cinemax_movie_app/Core/Services/API/cinemax_api.dart';
 import 'package:cinemax_movie_app/Features/MovieDetails/movie_details.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 import '../../Constants/colors_const.dart';
 
 class HomeBannerItem extends StatelessWidget {
   const HomeBannerItem({
     super.key,
+    required this.movieModel,
   });
-
+  final MovieModel movieModel;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, MovieDetails.routeName);
+        PersistentNavBarNavigator.pushNewScreenWithRouteSettings(
+          context,
+          settings: RouteSettings(
+              name: MovieDetails.routeName, arguments: movieModel),
+          screen: const MovieDetails(),
+          withNavBar: true,
+          pageTransitionAnimation: PageTransitionAnimation.cupertino,
+        );
       },
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 8),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
-          image: const DecorationImage(
+          image: DecorationImage(
             image: NetworkImage(
-                'https://insomniac.games/wp-content/uploads/2018/09/Spider-Man_PS4_E3_2017_Hero.jpg'),
+              '${API.imageBaseUrl}${movieModel.movieImageUrl}',
+            ),
             fit: BoxFit.cover,
           ),
         ),
@@ -42,7 +54,7 @@ class HomeBannerItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Black Panther: Wakanda Forever',
+                      movieModel.movieName,
                       style: GoogleFonts.montserrat(
                         color: ConstColors.whiteColor,
                         fontSize: 16,
@@ -51,7 +63,7 @@ class HomeBannerItem extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      'On March 2, 2022 ',
+                      movieModel.movieDate,
                       style: GoogleFonts.montserrat(
                         color: ConstColors.whiteColor,
                         fontSize: 14,

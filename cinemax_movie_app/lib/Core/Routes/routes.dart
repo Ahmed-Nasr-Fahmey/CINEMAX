@@ -2,10 +2,12 @@ import 'package:cinemax_movie_app/Core/Shared/widgets/bottom_navigation_bar.dart
 import 'package:cinemax_movie_app/Features/Downloads/downloads_view.dart';
 import 'package:cinemax_movie_app/Features/Home/home_view.dart';
 import 'package:cinemax_movie_app/Features/MostPopular/most_popular_view.dart';
+import 'package:cinemax_movie_app/Features/MovieDetails/movie_trailers_view.dart';
 import 'package:cinemax_movie_app/Features/Premium/PremiumAccount/premium_account_view.dart';
 import 'package:cinemax_movie_app/Features/Profile/LanguageView/language_view.dart';
 import 'package:cinemax_movie_app/Features/Profile/ProfileView/profile_view.dart';
 import 'package:cinemax_movie_app/Features/Search/SearchView/search_view.dart';
+import 'package:cinemax_movie_app/Features/TopRated/top_rated_view.dart';
 import 'package:flutter/material.dart';
 import 'package:cinemax_movie_app/Features/MovieDetails/movie_details.dart';
 import 'package:cinemax_movie_app/Features/OnBoarding/Splash/splash_view.dart';
@@ -110,6 +112,13 @@ class Routes {
       case CustomBottomNavigationBar.routeName:
         return MaterialPageRoute(
             builder: (context) => const CustomBottomNavigationBar(),
+            settings: settings);
+      case TopRatedView.routeName:
+        return MaterialPageRoute(
+            builder: (context) => const TopRatedView(), settings: settings);
+      case MovieTrailersView.routeName:
+        return MaterialPageRoute(
+            builder: (context) => const MovieTrailersView(),
             settings: settings);
       default:
         return MaterialPageRoute(

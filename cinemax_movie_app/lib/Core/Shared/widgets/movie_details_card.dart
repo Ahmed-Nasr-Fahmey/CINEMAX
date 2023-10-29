@@ -1,4 +1,5 @@
 import 'package:cinemax_movie_app/Core/Constants/colors_const.dart';
+import 'package:cinemax_movie_app/Core/Models/MovieModel/movie_model.dart';
 import 'package:cinemax_movie_app/Core/Shared/Customs/custom_play_video.dart';
 import 'package:cinemax_movie_app/Core/Shared/widgets/trailer_button.dart';
 import 'package:flutter/material.dart';
@@ -7,8 +8,9 @@ import 'package:google_fonts/google_fonts.dart';
 class MovieDetailsCard extends StatelessWidget {
   const MovieDetailsCard({
     super.key,
+    required this.movieModel,
   });
-
+  final MovieModel movieModel;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -24,7 +26,7 @@ class MovieDetailsCard extends StatelessWidget {
           children: [
             Row(
               children: [
-                const CustomPlayVideo(image: "Assets/images/wishListMovie.png"),
+                CustomPlayVideo(imageUrl: movieModel.movieImageUrl),
                 Padding(
                   padding: const EdgeInsets.only(left: 16),
                   child: Column(
@@ -64,9 +66,10 @@ class MovieDetailsCard extends StatelessWidget {
                         "Episode 1",
                         style: GoogleFonts.montserrat(
                           textStyle: const TextStyle(
-                              color: ConstColors.whiteColor,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600),
+                            color: ConstColors.whiteColor,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
                       ),
                     ],
@@ -74,9 +77,11 @@ class MovieDetailsCard extends StatelessWidget {
                 ),
                 const Spacer(),
                 const TrailerButton(
-                    backgroundColor: ConstColors.backgroundColor,
-                    iconColor: Colors.orange,
-                    icon: Icons.file_download_outlined)
+                  backgroundColor: ConstColors.backgroundColor,
+                  iconColor: Colors.orange,
+                  icon: Icons.file_download_outlined,
+                  onTap: null,
+                )
               ],
             ),
             const SizedBox(
@@ -86,9 +91,10 @@ class MovieDetailsCard extends StatelessWidget {
               "Football player who longs to write his own music. It’s not all smiles for this hunk though after he gets involved with his music teacher.",
               style: GoogleFonts.montserrat(
                 textStyle: const TextStyle(
-                    color: ConstColors.grayColor,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400),
+                  color: ConstColors.grayColor,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                ),
               ),
             ),
           ],

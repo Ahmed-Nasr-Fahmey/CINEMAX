@@ -2,6 +2,7 @@ import 'package:cinemax_movie_app/Core/Constants/images_const.dart';
 import 'package:cinemax_movie_app/Core/Shared/Customs/custom_botton_sheet.dart';
 import 'package:cinemax_movie_app/Features/Onboarding/OnboardingView2/onboarding_view_2.dart';
 import 'package:flutter/material.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 class OnboardingView1 extends StatelessWidget {
   const OnboardingView1({super.key});
@@ -23,7 +24,14 @@ class OnboardingView1 extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 24),
               child: CustomBottomSheet(
                 onTap: () {
-                  Navigator.pushNamed(context, OnboardingView2.routeName);
+                  PersistentNavBarNavigator.pushNewScreenWithRouteSettings(
+                    context,
+                    settings:
+                        const RouteSettings(name: OnboardingView2.routeName),
+                    screen: const OnboardingView2(),
+                    withNavBar: true,
+                    pageTransitionAnimation: PageTransitionAnimation.cupertino,
+                  );
                 },
                 index: 1,
                 image: ConstImages.onboarding1NextButton,

@@ -1,6 +1,8 @@
 import 'dart:ui';
 
 import 'package:cinemax_movie_app/Features/Onboarding/LoginSignUp/login_signup_view.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -77,9 +79,18 @@ class ProfileAlertDialog extends StatelessWidget {
                           ),
                         ),
                       ),
-                      onPressed: () {
-                        Navigator.of(context).pushNamedAndRemoveUntil(
-                            LoginSignUpView.routeName, (route) => false);
+                      onPressed: () async {
+                        await FirebaseAuth.instance.signOut();
+
+                        // ignore: use_build_context_synchronously
+                        Navigator.of(context).pushAndRemoveUntil(
+                          CupertinoPageRoute(
+                            builder: (BuildContext context) {
+                              return const LoginSignUpView();
+                            },
+                          ),
+                          (_) => false,
+                        );
                       },
                       child: SizedBox(
                         height: 56,

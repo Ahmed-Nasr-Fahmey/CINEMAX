@@ -1,7 +1,10 @@
 import 'dart:ui';
 
+import 'package:cinemax_movie_app/Core/Models/MovieModel/movie_model.dart';
+import 'package:cinemax_movie_app/Core/Services/API/cinemax_api.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 import '../../../Features/MovieDetails/movie_details.dart';
 import '../../../Features/Premium/PremiumAccount/premium_account_view.dart';
@@ -11,15 +14,31 @@ class CustomMovieCard extends StatelessWidget {
   const CustomMovieCard({
     super.key,
     required this.isFree,
+    required this.movieModel,
   });
+  final MovieModel movieModel;
   final bool isFree;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         isFree
-            ? Navigator.pushNamed(context, MovieDetails.routeName)
-            : Navigator.pushNamed(context, PremiumAccountView.routeName);
+            ? PersistentNavBarNavigator.pushNewScreenWithRouteSettings(
+                context,
+                settings: RouteSettings(
+                    name: MovieDetails.routeName, arguments: movieModel),
+                screen: const MovieDetails(),
+                withNavBar: true,
+                pageTransitionAnimation: PageTransitionAnimation.cupertino,
+              )
+            : PersistentNavBarNavigator.pushNewScreenWithRouteSettings(
+                context,
+                settings:
+                    const RouteSettings(name: PremiumAccountView.routeName),
+                screen: const PremiumAccountView(),
+                withNavBar: true,
+                pageTransitionAnimation: PageTransitionAnimation.cupertino,
+              );
       },
       child: SizedBox(
         width: double.infinity,
@@ -30,9 +49,9 @@ class CustomMovieCard extends StatelessWidget {
               width: 112,
               height: 147,
               decoration: ShapeDecoration(
-                image: const DecorationImage(
+                image: DecorationImage(
                   image: NetworkImage(
-                      'https://upload.wikimedia.org/wikipedia/en/2/21/Web_of_Spider-Man_Vol_1_129-1.png'),
+                      '${API.imageBaseUrl}${movieModel.movieImageUrl}'),
                   fit: BoxFit.fill,
                 ),
                 shape: RoundedRectangleBorder(
@@ -65,7 +84,9 @@ class CustomMovieCard extends StatelessWidget {
                         ),
                         const SizedBox(width: 4),
                         Text(
-                          '4.5',
+                          '${movieModel.movieRate}'.length > 3
+                              ? '${movieModel.movieRate}'.substring(0, 3)
+                              : '${movieModel.movieRate}',
                           style: GoogleFonts.montserrat(
                             color: ConstColors.premiumColor,
                             fontSize: 12,
@@ -109,15 +130,15 @@ class CustomMovieCard extends StatelessWidget {
                         ),
                       ),
                     ),
-                    const Positioned(
+                    Positioned(
                       left: 0,
                       top: 32,
                       child: SizedBox(
                         width: 199,
                         child: Text(
-                          'Spider-Man No Way.. ',
+                          movieModel.movieName,
                           overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.white,
                             fontSize: 16,
                             fontFamily: 'Montserrat',
@@ -157,7 +178,7 @@ class CustomMovieCard extends StatelessWidget {
                         ),
                       ),
                     ),
-                    const Positioned(
+                    Positioned(
                       left: 0,
                       top: 64,
                       child: SizedBox(
@@ -165,7 +186,7 @@ class CustomMovieCard extends StatelessWidget {
                         height: 40,
                         child: Stack(
                           children: [
-                            Icon(
+                            const Icon(
                               Icons.calendar_month,
                               color: ConstColors.grayColor,
                               size: 18,
@@ -174,8 +195,8 @@ class CustomMovieCard extends StatelessWidget {
                               left: 30,
                               top: 1,
                               child: Text(
-                                '2021',
-                                style: TextStyle(
+                                movieModel.movieDate,
+                                style: const TextStyle(
                                   color: Color(0xFF92929D),
                                   fontSize: 12,
                                   fontFamily: 'Montserrat',

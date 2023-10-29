@@ -1,4 +1,6 @@
 import 'package:cinemax_movie_app/Core/Constants/colors_const.dart';
+import 'package:cinemax_movie_app/Core/Models/MovieModel/movie_model.dart';
+import 'package:cinemax_movie_app/Core/Services/API/cinemax_api.dart';
 import 'package:cinemax_movie_app/Core/Shared/Customs/custom_app_bar.dart';
 import 'package:cinemax_movie_app/Core/Shared/widgets/crew_item.dart';
 import 'package:cinemax_movie_app/Core/Shared/widgets/details_movie.dart';
@@ -7,8 +9,12 @@ import 'package:cinemax_movie_app/Core/Shared/widgets/movie_details_card.dart';
 import 'package:cinemax_movie_app/Core/Shared/widgets/movie_details_story.dart';
 import 'package:cinemax_movie_app/Core/Shared/widgets/movie_options.dart';
 import 'package:cinemax_movie_app/Core/Shared/widgets/movie_rate.dart';
+import 'package:cinemax_movie_app/Features/MovieDetails/movie_trailers_view.dart';
+import 'package:cinemax_movie_app/StateManagement/Cubits/MovieCubit/movie_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 class MovieDetails extends StatefulWidget {
   const MovieDetails({super.key});
@@ -28,6 +34,10 @@ class _MovieDetailsState extends State<MovieDetails> {
 
   @override
   Widget build(BuildContext context) {
+    final MovieModel movieModel =
+        ModalRoute.of(context)!.settings.arguments as MovieModel;
+    BlocProvider.of<MovieCubit>(context)
+        .getMovieTrailers(movieID: movieModel.movieID.toString());
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -35,9 +45,11 @@ class _MovieDetailsState extends State<MovieDetails> {
           children: [
             Stack(
               children: [
-                Image.asset(
-                  'Assets/images/MovieDetails.png',
+                Image.network(
+                  '${API.imageBaseUrl}${movieModel.movieImageUrl}',
                   height: 550,
+                  width: double.infinity,
+                  fit: BoxFit.cover,
                 ),
                 Container(
                   height: 550,
@@ -53,21 +65,39 @@ class _MovieDetailsState extends State<MovieDetails> {
                   ),
                   child: Column(
                     children: [
-                      const CustomAppBar(
+                      CustomAppBar(
                         hasLoveIcon: true,
-                        text: "Riverdale",
+                        text: movieModel.movieName,
+                        movieModel: movieModel,
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 24, bottom: 16),
-                        child: Image.asset(
-                          'Assets/images/MovieDetails.png',
+                        child: Image.network(
+                          '${API.imageBaseUrl}${movieModel.movieImageUrl}',
                           width: 205,
                           height: 280,
                         ),
                       ),
                       const DetailsMovie(),
-                      const MovieRate(),
-                      const MovieOptions()
+                      MovieRate(movieModel: movieModel),
+                      MovieOptions(
+                        movieModel: movieModel,
+                        onTap: () {
+                          PersistentNavBarNavigator
+                              .pushNewScreenWithRouteSettings(
+                            context,
+                            settings: RouteSettings(
+                              name: MovieTrailersView.routeName,
+                              arguments: BlocProvider.of<MovieCubit>(context)
+                                  .movieTrailersList,
+                            ),
+                            screen: const MovieTrailersView(),
+                            withNavBar: true,
+                            pageTransitionAnimation:
+                                PageTransitionAnimation.cupertino,
+                          );
+                        },
+                      )
                     ],
                   ),
                 )
@@ -81,7 +111,7 @@ class _MovieDetailsState extends State<MovieDetails> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const MovieDetailsStoryline(),
+                  MovieDetailsStoryline(movieModel: movieModel),
                   const SizedBox(
                     height: 24,
                   ),
@@ -89,9 +119,10 @@ class _MovieDetailsState extends State<MovieDetails> {
                     "Cast and Crew",
                     style: GoogleFonts.montserrat(
                       textStyle: const TextStyle(
-                          color: ConstColors.whiteColor,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600),
+                        color: ConstColors.whiteColor,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                   ),
                   SizedBox(
@@ -121,7 +152,7 @@ class _MovieDetailsState extends State<MovieDetails> {
                   const SizedBox(
                     height: 16,
                   ),
-                  const MovieDetailsCard(),
+                  MovieDetailsCard(movieModel: movieModel),
                   const SizedBox(
                     height: 54,
                   )

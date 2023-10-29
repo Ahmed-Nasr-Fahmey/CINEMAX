@@ -1,12 +1,14 @@
 import 'package:cinemax_movie_app/Core/Constants/colors_const.dart';
+import 'package:cinemax_movie_app/Core/Models/MovieModel/movie_model.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class MovieDetailsStoryline extends StatelessWidget {
   const MovieDetailsStoryline({
     super.key,
+    required this.movieModel,
   });
-
+  final MovieModel movieModel;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -25,7 +27,7 @@ class MovieDetailsStoryline extends StatelessWidget {
           height: 8,
         ),
         Text(
-          "Originally a story from Archie Comics which started in 1941, Riverdale centres around a group of high school students who are shocked by the death of classmate, Jason Blossom. Together theyunravel the secrets of Riverdale and who ",
+          movieModel.movieOverview,
           style: GoogleFonts.montserrat(
             textStyle: const TextStyle(
                 color: ConstColors.grayColor,

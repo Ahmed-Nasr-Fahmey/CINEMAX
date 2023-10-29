@@ -1,12 +1,14 @@
 import 'package:cinemax_movie_app/Core/Constants/colors_const.dart';
+import 'package:cinemax_movie_app/Core/Models/MovieModel/movie_model.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class MovieRate extends StatelessWidget {
   const MovieRate({
     super.key,
+    required this.movieModel,
   });
-
+  final MovieModel movieModel;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -22,15 +24,18 @@ class MovieRate extends StatelessWidget {
             children: [
               const Icon(
                 Icons.star_rate_rounded,
-                color: Colors.orange,
+                color: Color.fromRGBO(255, 152, 0, 1),
               ),
               Text(
-                "4.5",
+                '${movieModel.movieRate}'.length > 3
+                    ? '${movieModel.movieRate}'.substring(0, 3)
+                    : '${movieModel.movieRate}',
                 style: GoogleFonts.montserrat(
                   textStyle: const TextStyle(
-                      color: Colors.orange,
-                      fontSize: 12,
-                      fontWeight: FontWeight.w600),
+                    color: Colors.orange,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
             ],

@@ -4,8 +4,10 @@ import 'package:cinemax_movie_app/Core/Shared/Customs/custom_app_bar.dart';
 import 'package:cinemax_movie_app/Core/Shared/Customs/custom_main_button.dart';
 import 'package:cinemax_movie_app/Features/Onboarding/LoginSignUp/login_signup_view.dart';
 import 'package:cinemax_movie_app/Features/Premium/PaymentMethod/payment_method.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 import '../../../Core/Shared/widgets/payment_method.dart';
 
@@ -104,7 +106,14 @@ class _PremiumAccountViewState extends State<PremiumAccountView> {
           CustomMainButton(
               text: 'Payment Method',
               onTap: () {
-                Navigator.pushNamed(context, PaymentMethodView.routeName);
+                PersistentNavBarNavigator.pushNewScreenWithRouteSettings(
+                  context,
+                  settings:
+                      const RouteSettings(name: PaymentMethodView.routeName),
+                  screen: const PaymentMethodView(),
+                  withNavBar: true,
+                  pageTransitionAnimation: PageTransitionAnimation.cupertino,
+                );
               }),
           const SizedBox(
             height: 10,
@@ -123,8 +132,14 @@ class _PremiumAccountViewState extends State<PremiumAccountView> {
               ),
               TextButton(
                 onPressed: () {
-                  Navigator.pushNamedAndRemoveUntil(
-                      context, LoginSignUpView.routeName, (route) => false);
+                  Navigator.of(context).pushAndRemoveUntil(
+                    CupertinoPageRoute(
+                      builder: (BuildContext context) {
+                        return const LoginSignUpView();
+                      },
+                    ),
+                    (_) => false,
+                  );
                 },
                 child: Text(
                   'Login',

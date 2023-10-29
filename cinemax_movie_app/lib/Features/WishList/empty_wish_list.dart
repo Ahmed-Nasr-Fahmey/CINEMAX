@@ -32,16 +32,18 @@ class EmptyWishList extends StatelessWidget {
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 90),
+          SizedBox(
+            width: 180,
             child: Center(
               child: Text(
                 "Find your movie by Type title, categories, years, etc ",
+                textAlign: TextAlign.center,
                 style: GoogleFonts.montserrat(
                   textStyle: const TextStyle(
-                      color: ConstColors.grayColor,
-                      fontSize: 12,
-                      fontWeight: FontWeight.w500),
+                    color: ConstColors.grayColor,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
               ),
             ),
