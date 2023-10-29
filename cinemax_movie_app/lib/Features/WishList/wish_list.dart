@@ -39,10 +39,7 @@ class WishListView extends StatelessWidget {
                       hasLoveIcon: false,
                     ),
                   ),
-                  Padding(
-                    padding: EdgeInsets.only(right: 16),
-                    child: CustomWishListCardBuilder(),
-                  ),
+                  CustomWishListCardBuilder(),
                 ],
               ),
             )

@@ -94,7 +94,7 @@ class ProfileAlertDialog extends StatelessWidget {
                       },
                       child: SizedBox(
                         height: 56,
-                        width: 90,
+                        width: 70,
                         child: Center(
                           child: Text(
                             'Log Out',
@@ -122,7 +122,7 @@ class ProfileAlertDialog extends StatelessWidget {
                       },
                       child: SizedBox(
                         height: 56,
-                        width: 90,
+                        width: 70,
                         child: Center(
                           child: Text(
                             'Cancel',

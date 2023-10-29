@@ -25,92 +25,95 @@ class _CustomWishListCardState extends State<CustomWishListCard> {
           borderRadius: BorderRadius.circular(16),
           color: const Color(0xFF252836).withOpacity(0.32)),
       child: Padding(
-        padding: const EdgeInsets.all(12.0),
+        padding: const EdgeInsets.all(12),
         child: Row(
+          mainAxisSize: MainAxisSize.min,
           children: [
             CustomPlayVideo(imageUrl: widget.movieModel.movieImageUrl),
-            Padding(
-              padding: const EdgeInsets.only(left: 24),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Action',
+            const SizedBox(
+              width: 16,
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Action',
+                  style: GoogleFonts.montserrat(
+                    textStyle: const TextStyle(
+                      color: ConstColors.grayColor,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 6,
+                ),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.5,
+                  child: Text(
+                    widget.movieModel.movieName,
+                    overflow: TextOverflow.ellipsis,
                     style: GoogleFonts.montserrat(
                       textStyle: const TextStyle(
-                          color: ConstColors.grayColor,
-                          fontSize: 12,
-                          fontWeight: FontWeight.w500),
+                        color: ConstColors.whiteColor,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                   ),
-                  const SizedBox(
-                    height: 6,
-                  ),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.5,
-                    child: Text(
-                      widget.movieModel.movieName,
-                      overflow: TextOverflow.ellipsis,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Movie",
                       style: GoogleFonts.montserrat(
                         textStyle: const TextStyle(
-                          color: ConstColors.whiteColor,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
+                          color: ConstColors.grayColor,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
                     ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Movie",
-                        style: GoogleFonts.montserrat(
-                          textStyle: const TextStyle(
-                            color: ConstColors.grayColor,
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
+                    const Padding(
+                      padding: EdgeInsets.only(left: 8, right: 4),
+                      child: Icon(
+                        Icons.star_purple500_outlined,
+                        color: Color(0xFFFF8700),
+                        size: 20,
                       ),
-                      const Padding(
-                        padding: EdgeInsets.only(left: 8, right: 4),
-                        child: Icon(
-                          Icons.star_purple500_outlined,
+                    ),
+                    Text(
+                      '${widget.movieModel.movieRate}'.length > 3
+                          ? '${widget.movieModel.movieRate}'.substring(0, 3)
+                          : '${widget.movieModel.movieRate}',
+                      style: GoogleFonts.montserrat(
+                        textStyle: const TextStyle(
                           color: Color(0xFFFF8700),
-                          size: 20,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
-                      Text(
-                        '${widget.movieModel.movieRate}'.length > 3
-                            ? '${widget.movieModel.movieRate}'.substring(0, 3)
-                            : '${widget.movieModel.movieRate}',
-                        style: GoogleFonts.montserrat(
-                          textStyle: const TextStyle(
-                            color: Color(0xFFFF8700),
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
+                    ),
+                    const SizedBox(
+                      width: 30,
+                    ),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.06,
+                    ),
+                    IconButton(
+                      onPressed: widget.onPressed,
+                      icon: const Icon(
+                        Icons.delete,
+                        size: 24,
+                        color: Colors.redAccent,
                       ),
-                      const SizedBox(
-                        width: 30,
-                      ),
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.08,
-                      ),
-                      IconButton(
-                        onPressed: widget.onPressed,
-                        icon: const Icon(
-                          Icons.delete,
-                          size: 24,
-                          color: Colors.redAccent,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ],
         ),

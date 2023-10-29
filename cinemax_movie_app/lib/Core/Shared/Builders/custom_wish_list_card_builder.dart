@@ -29,6 +29,7 @@ class _CustomWishListCardBuilderState extends State<CustomWishListCardBuilder> {
             padding: const EdgeInsets.only(
               bottom: 16,
               left: 16,
+              right: 16,
             ),
             child: CustomWishListCard(
               movieModel: BlocProvider.of<UserCubit>(context)
